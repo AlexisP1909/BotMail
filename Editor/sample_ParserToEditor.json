@@ -18,11 +18,11 @@
           "nb": 5,
           "'type": "Alfen Simple"
         },
-        "BorneDouble": {
+        "borneDouble": {
           "nb": 4,
           "'type": "Alfen Double"
         },
-        "Armoire": {
+        "armoire": {
           "nb": 3,
           "'type": "Armoire electrique1"
         }
