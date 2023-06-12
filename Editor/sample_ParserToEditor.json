@@ -43,7 +43,7 @@
         "email": "john.doe@gmail.com"
       },
       "materiel": {
-        "borneSimple": {
+        "borne  Simple": {
           "nb": 9,
           "'type": "Scame Simple"
         },
@@ -53,11 +53,40 @@
         },
         "Armoire": {
           "nb": 7,
-          "'type": "Armoire electrique1"
+          "'type": "Armoire electrique2"
         }
       },
       "nomEntreprise": "Entreprise 2",
       "adresse": "Adresse 2"
+    },
+    {
+      "departement": "85",
+      "dateMiseEnService": "07/06/2022",
+      "periodiciteEnMois": 12,
+      "nbVisitesOrganisees": 0,
+      "nbDemiJoursTravail": 2,
+      "contact": {
+        "prenom": "Bob",
+        "nom": "ElBricole",
+        "telephone": "0123456789",
+        "email": "bob.elbricole@gmail.com"
+      },
+      "materiel": {
+        "borneSimple": {
+          "nb": 1,
+          "'type": "Alfen Simple"
+        },
+        "borneDouble": {
+          "nb": 6,
+          "'type": "Alfen Double"
+        },
+        "armoire": {
+          "nb": 8,
+          "'type": "Armoire electrique3"
+        }
+      },
+      "nomEntreprise": "Entreprise 3",
+      "adresse": "Adresse 3"
     }
   ]
 }
