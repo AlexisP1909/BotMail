@@ -86,7 +86,12 @@ def parseInputData(data):
 
     print(parcs)
     
+def createMaterielHTML(materiels):
+    for materiel in materiels:
+        if
 
+def createParkHTML(parc):
+    pass
 
 
 nomRegion = "PACA"

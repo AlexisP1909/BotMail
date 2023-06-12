@@ -6,24 +6,26 @@
       "dateMiseEnService": "09/06/2020",
       "periodiciteEnMois": 12,
       "nbVisitesOrganisees": 2,
-      "nbDemiJoursTravail":4,
-      "contact":{
-        "prenom":"Bruce",
-        "nom":"Willis",
-        "telephone":"0123456789",
-        "email":"bruce.willis@gmail.com"
+      "nbDemiJoursTravail": 4,
+      "contact": {
+        "prenom": "Bruce",
+        "nom": "Willis",
+        "telephone": "0123456789",
+        "email": "bruce.willis@gmail.com"
       },
-      "bornesSimple": {
-        "nb": 5,
-        "'type": "Alfen Simple"
-      },
-      "BorneDouble": {
-        "nb": 4,
-        "'type": "Alfen Double"
-      },
-      "Armoire": {
-        "nb": 3,
-        "'type": "Armoire electrique1"
+      "materiel": {
+        "borneSimple": {
+          "nb": 5,
+          "'type": "Alfen Simple"
+        },
+        "BorneDouble": {
+          "nb": 4,
+          "'type": "Alfen Double"
+        },
+        "Armoire": {
+          "nb": 3,
+          "'type": "Armoire electrique1"
+        }
       },
       "nomEntreprise": "Entreprise 1",
       "adresse": "Adresse 1"
@@ -33,24 +35,26 @@
       "dateMiseEnService": "01/06/2022",
       "periodiciteEnMois": 12,
       "nbVisitesOrganisees": 1,
-      "nbDemiJoursTravail":2,
-      "contact":{
-        "prenom":"John",
-        "nom":"Doe",
-        "telephone":"0123456789",
-        "email":"john.doe@gmail.com"
+      "nbDemiJoursTravail": 2,
+      "contact": {
+        "prenom": "John",
+        "nom": "Doe",
+        "telephone": "0123456789",
+        "email": "john.doe@gmail.com"
       },
-      "bornesSimple": {
-        "nb": 9,
-        "'type": "Scame Simple"
-      },
-      "BorneDouble": {
-        "nb": 8,
-        "'type": "Scame Double"
-      },
-      "Armoire": {
-        "nb": 7,
-        "'type": "Armoire electrique1"
+      "materiel": {
+        "borneSimple": {
+          "nb": 9,
+          "'type": "Scame Simple"
+        },
+        "BorneDouble": {
+          "nb": 8,
+          "'type": "Scame Double"
+        },
+        "Armoire": {
+          "nb": 7,
+          "'type": "Armoire electrique1"
+        }
       },
       "nomEntreprise": "Entreprise 2",
       "adresse": "Adresse 2"
