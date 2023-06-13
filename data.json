@@ -1,1 +1,112 @@
-{"dateDonnees": "13/06/2023", "parcs": [{"departement": "Seine-Saint-Denis\n(93)", "dateMiseEnService": "27/12/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 1, "contact": {"prenom": "Albert", "nom": "Albert1"}, "materiel": {"borneSimple": {"NbBornesSimples": "4", "TypeBornesSimples": "(ALFEN EVE SINGLE PRO LINE)"}, "borneDouble": {"NbBornesDoubles": "2", "TypeBornesDoubles": "(ALFEN )"}, "armoire": {"NbArmoires": "1"}}, "nomEntreprise": "ENTREPRISE 1", "adresse": "1 rue Albert Albert\n92700, Colombes"}, {"departement": "Yvelines\n(78)", "dateMiseEnService": "03/03/2022", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 1, "contact": {"prenom": "Albert", "nom": "Albert2", "telephone": "01.00.00.00.00", "email": "albert@albert.com"}, "materiel": {"borneSimple": {"NbBornesSimples": "3", "TypeBornesSimples": "(ALFEN EVE MINI MURALE\nALFEN EVE DOUBLE PRO LINE) "}, "borneDouble": {"NbBornesDoubles": "1", "TypeBornesDoubles": "(ALFEN)"}, "armoire": {"NbArmoires": "2"}}, "nomEntreprise": "ENTREPRISE 2", "adresse": "2 rue Albert Albert\n92700, Colombes"}, {"departement": "Alpes-Maritimes\n(06)", "dateMiseEnService": "01/07/2022", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 4, "contact": {"prenom": "Albert", "nom": "Albert2"}, "materiel": {"borneSimple": {"NbBornesSimples": "1", "TypeBornesSimples": "(ALFEN EVE SINGLE PRO-LINE)"}, "borneDouble": {"NbBornesDoubles": "0"}, "armoire": {"NbArmoires": "0"}}, "nomEntreprise": "ENTREPRISE 3", "adresse": "3 rue Albert Albert\n92700, Colombes"}, {"departement": "Gironde \n(33)", "dateMiseEnService": "17/04/2022", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 2, "contact": {"prenom": "Albert", "nom": "Albert2", "telephone": "01.00.00.00.00", "email": "albert@albert.com"}, "materiel": {"borneSimple": {"NbBornesSimples": "5", "TypeBornesSimples": "(ALFEN EVE SINGLE PRO LINE)"}, "borneDouble": {"NbBornesDoubles": "3", "TypeBornesDoubles": "(ALFEN )"}, "armoire": {"NbArmoires": "2"}}, "nomEntreprise": "ENTREPRISE 4", "adresse": "4 rue Albert Albert\n92700, Colombes"}]}
+{
+    "dateDonnees": "13/06/2023",
+    "parcs": [
+        {
+            "departement": "Seine-Saint-Denis\n(93)",
+            "dateMiseEnService": "27/07/2021",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Albert",
+                "nom": "Albert1"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "4",
+                    "type": "(ALFEN EVE SINGLE PRO LINE)"
+                },
+                "borneDouble": {
+                    "nb": "2",
+                    "type": "(ALFEN )"
+                },
+                "armoire": {
+                    "nb": "1"
+                }
+            },
+            "nomEntreprise": "ENTREPRISE 1",
+            "adresse": "1 rue Albert Albert\n92700, Colombes"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "03/06/2021",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Albert",
+                "nom": "Albert2",
+                "telephone": "01.00.00.00.00",
+                "email": "albert@albert.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "3",
+                    "type": "(ALFEN EVE MINI MURALE) "
+                },
+                "borneDouble": {
+                    "nb": "1",
+                    "type": "(ALFEN)"
+                },
+                "armoire": {
+                    "nb": "2"
+                }
+            },
+            "nomEntreprise": "ENTREPRISE 2",
+            "adresse": "2 rue Albert Albert\n92700, Colombes"
+        },
+        {
+            "departement": "Alpes-Maritimes\n(06)",
+            "dateMiseEnService": "01/07/2021",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 4,
+            "contact": {
+                "prenom": "Albert",
+                "nom": "Albert2"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1",
+                    "type": "(ALFEN EVE SINGLE PRO-LINE)"
+                },
+                "borneDouble": {
+                    "nb": "0"
+                },
+                "armoire": {
+                    "nb": "0"
+                }
+            },
+            "nomEntreprise": "ENTREPRISE 3",
+            "adresse": "3 rue Albert Albert\n92700, Colombes"
+        },
+        {
+            "departement": "Gironde \n(33)",
+            "dateMiseEnService": "17/08/2021",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Albert",
+                "nom": "Albert2",
+                "telephone": "01.00.00.00.00",
+                "email": "albert@albert.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "5",
+                    "type": "(ALFEN EVE SINGLE PRO LINE)"
+                },
+                "borneDouble": {
+                    "nb": "3",
+                    "type": "(ALFEN )"
+                },
+                "armoire": {
+                    "nb": "2"
+                }
+            },
+            "nomEntreprise": "ENTREPRISE 4",
+            "adresse": "4 rue Albert Albert\n92700, Colombes"
+        }
+    ]
+}

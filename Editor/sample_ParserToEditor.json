@@ -43,15 +43,15 @@
         "email": "john.doe@gmail.com"
       },
       "materiel": {
-        "borne  Simple": {
+        "borneSimple": {
           "nb": 9,
           "'type": "Scame Simple"
         },
-        "BorneDouble": {
+        "borneDouble": {
           "nb": 8,
           "'type": "Scame Double"
         },
-        "Armoire": {
+        "armoire": {
           "nb": 7,
           "'type": "Armoire electrique2"
         }

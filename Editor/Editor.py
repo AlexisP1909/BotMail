@@ -5,6 +5,10 @@ from dateutil.relativedelta import relativedelta
 
 periodeEntretienEnMois = 3
 
+typeMateriel = {"borneSimple":"borne simple",
+                "borneDouble": "borne double",
+                "armoire": "armoire"}
+
 class Urgence(Enum):
     organise = "organise"
     pasUrgent = "pasUrgent"
@@ -28,7 +32,7 @@ def readJSON(JSONFile):
     SORTIE: data (dict) Dictionnaire correspondant au contenu du fichier JSON lu
     """
     try:
-        with open(JSONFile,"r") as file:
+        with open(JSONFile,"r", encoding="utf8") as file:
             data = json.load(file)
         #print(data)
         return data
@@ -42,6 +46,7 @@ def findRegion(departement):
     ENTREE: departement (str) numéro d'un département
     SORTIE: (str) Région du département donné en entrée
     """
+    departement=''.join(x for x in departement if x.isdigit())
     if len(departement) == 1: departement = f"0{departement}" # Si le département est composé d'un seul chiffre et est donné comme tel dans l'input, on ajoute un 0 devant   
     for region, depts in dictRegions.items():
         print(f"Departement cherché {departement} dans liste: {depts}")
@@ -72,9 +77,9 @@ def parseInputData(data):
             date_entretien = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(1+parc["nbVisitesOrganisees"])) # On détermine la date de l'intervention à venir
             parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
-                parc["urgence"]=Urgence.dramatique #L'entretien est en retard
+                parc["urgence"]=Urgence.dramatique.value #L'entretien est en retard
             elif(dateDonneesFormate+relativedelta(months=1)>=date_entretien): #Si la date de l'entretien est dans un mois (ou moins, mais pas en retard)
-                parc["urgence"]=Urgence.urgent # L'entretien est considéré comme urgent
+                parc["urgence"]=Urgence.urgent.value # L'entretien est considéré comme urgent
             elif(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien): #Si la date de l'entretien est dans periodeEntretienEnMois mois (ou moins, mais pas sous 1 mois ou retard)
                 parc["urgence"]=Urgence.pasUrgent.value # L'entretien est considéré comme pas urgent
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
@@ -83,7 +88,7 @@ def parseInputData(data):
         """diffTemps = diff_date(date_entretien,dateDonneesFormate)
         print(f"Différence de temps entre les deux dates {dateDonneesFormate} et {date_entretien} : {diffTemps}")
         print(f"Différence en mois {diffTemps.years*12+diffTemps.months}")"""
-    return parcs    
+    return parcs, dateDonneesFormate    
 
 def trierParcs(donneesParcs):
     dictParcs = {}
@@ -97,65 +102,62 @@ def trierParcs(donneesParcs):
         parcs.sort(key=lambda x: x["dateEntretien"]) # Trier les parcs selon la date de l'entretien
         for i, parc in enumerate(parcs[:]):
             if parc["urgence"]==Urgence.organise.value: parcs.append(parcs.pop(i)) # Si un parc est d'urgence "organise" on l'ajoute à la fin de la liste
-    
-    print(dictParcs)
-    return dictParcs
+    listeTotaux = []
+    i = 0
+    for nomRegion, parcs in dictParcs.items():# Tri des région selon celle qui a le plus de demi-journées de travail
+        total = 0
+        for parc in parcs: total+=int(parc["nbDemiJoursTravail"])
+        listeTotaux.append((i, total))
+        i+=1
+    print("Liste du nouvel ordre", listeTotaux)
+    ordreJoursTrav = [x[0] for x in sorted(listeTotaux, key=lambda tup: tup[1], reverse=True)]
+    dictParcsRange = {list(dictParcs.keys())[i]:list(dictParcs.values())[i] for i in ordreJoursTrav}    
+    print(dictParcsRange)
+    return dictParcsRange
     
 def createMaterielHTML(materiels):
-    for materiel in materiels:
-        print(materiel)
-    return "test"
+    html = []
+    for materiel, details in materiels.items():
+        if details['nb']==0: continue
+        nomMateriel = typeMateriel[materiel].replace('e','es') if int(details['nb'])>1 else typeMateriel[materiel]
+        typeMatos = details['type'] if 'type' in details else ""
+        html.append(f"{details['nb']} {nomMateriel} {typeMatos}")    
+    return "<br>".join(html)
 
 def createParkHTML(parc):
-    return f"<tr><td class=\"{parc['urgence']}\">{parc['dateEntretien'].strftime('%d %m %Y')}</td><td>{createMaterielHTML(parc['materiel'])}</td><td>{parc['nomEntreprise']}</td><td>{parc['nomEntreprise']}</td></tr>"
+    infoSupDate = ""
+    if parc['urgence']==Urgence.organise.value: infoSupDate = "<br>organisée"
+    elif parc['urgence']==Urgence.dramatique.value: infoSupDate = "<br>en retard"
+    return f"""<tr>
+                <td class=\"{parc['urgence']}\">{parc['dateEntretien'].strftime('%d %m %Y')} {infoSupDate}</td>
+                <td>{createMaterielHTML(parc['materiel'])}</td>
+                <td>{parc['nbDemiJoursTravail']} demi-journée(s) de travail</td>
+                <td>{parc['nomEntreprise']}</td>
+                <td>{"<br>".join(parc['contact'].values())}</td>
+               </tr>"""
 
-def createHTML(dicoParcs):
+def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
+    """
+    Fonction qui crée l'HTML de l'email en récupérant le template "html_template.thml" et y ajoute les informations parsés
+    ENTREE: dicoParcs (dict) Dictionnaire des parcs, rangé selon la région et l'importance
+    """
+    with open(pathHTMLBrut,"r", encoding="utf8") as file:
+        html_brut = file.read()
     htmlData = ""
     for region, parcs in dicoParcs.items(): 
         htmlData+=f"<tr><th colspan=\"6\">{region}</th></tr>"
         for parc in parcs: htmlData+=createParkHTML(parc)
-    return htmlData
+    print("HTML créé", htmlData)
+    html_final = html_brut.replace("<!-- INSERER TABLEAU -->", htmlData)
+    html_final = html_final.replace("<!--DATE1-->", dateDonnees.strftime('%d %m %Y'))
+    html_final = html_final.replace("<!--DATE2-->", (dateDonnees+ relativedelta(months=periodeEntretienEnMois)).strftime('%d %m %Y'))
+    return html_final
     
-
-
-nomRegion = "PACA"
-titreLigne = f"<tr><th colspan=\"6\">{nomRegion}</th></tr>"
-print(titreLigne)
-
 refRegion("Editor\\departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
 if __name__ == "__main__":
-    donneesEntrees = readJSON("Editor\\sample_ParserToEditor.json")    
-    listeParcs = parseInputData(donneesEntrees)
+    donneesEntrees = readJSON("data.json")   # "Editor\\sample_ParserToEditor.json"
+    listeParcs, dateDonnees = parseInputData(donneesEntrees)    
+    print("LISTE DES PARCS", listeParcs)
     dictParcsTrie = trierParcs(listeParcs)
-    finalHTML = createHTML(dictParcsTrie)
-    print(finalHTML)
-    
-"""
-datas = {
-    "region":"PACA",
-    
-
-
-}
-    [3,2,1],
-    [6,5,4],
-    [9,8,7]
-]
-
-for data in datas:
-    materiel=""
-    nbBornesSimples = data[0]
-    nbBornesDoubles = data[1]
-    nbArmoires = data[2]
-
-    effectifs = [(nbBornesSimples, " borne simple"), (nbBornesDoubles, " borne double"), (nbArmoires, " armoire")]
-    
-    for index, (nb, texte) in enumerate(effectifs):
-        if nb>0:
-            if nb==1: materiel+=str(nb)+texte
-            else: materiel+=str(nb)+texte.replace("e","es")
-            if not index==len(effectifs)-1: materiel+="<br>"
-
-    ligneInfo = "<tr><td class=\"pasUrgent\">Date 1</td><td>{}</td><td>Client 1</td><td>Adresse 1</td></tr>".format(materiel)
-    print(ligneInfo)
-"""
+    html_content = createHTML(dictParcsTrie, dateDonnees, "Editor\\html_template.html")
+    print(html_content)

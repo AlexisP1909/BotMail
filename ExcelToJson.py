@@ -117,21 +117,21 @@ for i in range(3,nb_lignes):
 
     DictionnaireBorneSimple = {}
     if(len(BornesSimpl)>0):
-        DictionnaireBorneSimple["NbBornesSimples"] = BornesSimpl[0]
+        DictionnaireBorneSimple["nb"] = BornesSimpl[0]
         if(len(BornesSimpl)>1):
-          DictionnaireBorneSimple["TypeBornesSimples"] = BornesSimpl[1]
+          DictionnaireBorneSimple["type"] = BornesSimpl[1]
    
     DictionnaireBorneDouble = {}
     if(len(BornesDoubles)>0):
-        DictionnaireBorneDouble["NbBornesDoubles"] = BornesDoubles[0]
+        DictionnaireBorneDouble["nb"] = BornesDoubles[0]
         if(len(BornesDoubles)>1):
-            DictionnaireBorneDouble["TypeBornesDoubles"] = BornesDoubles[1]
+            DictionnaireBorneDouble["type"] = BornesDoubles[1]
     
     DictionnaireArmoires = {}
     if(len(Armoires)>0):
-        DictionnaireArmoires["NbArmoires"] = Armoires[0]
+        DictionnaireArmoires["nb"] = Armoires[0]
         if(len(Armoires)>1):
-            DictionnaireArmoires["typeArmoire"] = Armoires[1]
+            DictionnaireArmoires["type"] = Armoires[1]
 
     DictionnaireMateriel = {}
     DictionnaireMateriel["borneSimple"]=DictionnaireBorneSimple
