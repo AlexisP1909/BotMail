@@ -74,11 +74,11 @@ for i in range(0,nb_colonnes) :
             elif df.iloc[NuméroLigneEnTetes,i].lower()==NomC_Periodicite.lower() :
                 numC_Periodicite = i
             elif df.iloc[NuméroLigneEnTetes,i].lower()==NomC_VisiteOrganisee.lower() :
-                numC_VisiteOrganisee.append(str(i))#stocke chaque numéro de colone relevé
+                numC_VisiteOrganisee.append(str(i))#stocke chaque numéro de colonne relevé
 
 #Création des listes et dictionnaires globaux
 EnvoiJSON = {}
-date = str(datetime.datetime.today().strftime("%d/%m/%Y"))
+date = str(datetime.datetime.today().strftime("%d/%m/%Y"))#date d'aujourd'hui convertie en string
 EnvoiJSON["dateDonnees"] = date
 ListesParcs = []
 for i in range(3,nb_lignes):
@@ -101,8 +101,11 @@ for i in range(3,nb_lignes):
 
     DateMiseEnService = df.iloc[i,numC_DateMiseEnService]
     Periodicite = df.iloc[i,numC_Periodicite]
+
     for j in range(0,len(numC_VisiteOrganisee)-1):
-        NbVisitesOrganisees +=1
+        NbVisitesOrganisees +=1#le nombre de visites organisées depuis la mise en service = le nombre de périodes passées
+
+
     #Création des sous-sous-dictionnaires
     DictionnaireContact = {}
     if len(Contact)>0 :
