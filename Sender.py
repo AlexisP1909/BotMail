@@ -1,10 +1,8 @@
 import smtplib, ssl           #le module smtplib définit un objet de session client SMTP
-import csv
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 def EnvoiMail(Variables):
     html_content=Variables["html_content"]
-
     smtp_server = Variables["smtp_server"]
     port = Variables["port"]
     destinateur = Variables["destinateur"]

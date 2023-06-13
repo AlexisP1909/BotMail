@@ -132,12 +132,14 @@ def createParkHTML(parc):
     infoSupDate = ""
     if parc['urgence']==Urgence.organise.value: infoSupDate = "<br>organisée"
     elif parc['urgence']==Urgence.dramatique.value: infoSupDate = "<br>en retard"
+    nl = "\n"
     return f"""<tr>
                 <td class=\"{parc['urgence']}\">{parc['dateEntretien'].strftime('%d %m %Y')} {infoSupDate}</td>
                 <td>{createMaterielHTML(parc['materiel'])}</td>
                 <td>{parc['nbDemiJoursTravail']} demi-journée(s) de travail</td>
                 <td>{parc['nomEntreprise']}</td>
                 <td>{"<br>".join(parc['contact'].values())}</td>
+                <td>{parc['adresse'].replace(nl, ' ')}</td>
                </tr>"""
 
 def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):

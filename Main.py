@@ -1,8 +1,3 @@
-import pandas as pd
-from openpyxl import load_workbook
-import datetime
-import json
-import os
 from ExcelToJson import ExcelToPython
 from Editor import create_html_content
 from Sender import EnvoiMail
