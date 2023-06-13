@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 import pandas as pd
+import datetime
 import json
 # Load the Excel workbook
 wb = load_workbook('PlanningSandbox.xlsx')
@@ -75,6 +76,11 @@ for i in range(0,nb_colonnes) :
             elif df.iloc[NuméroLigneEnTetes,i].lower()==NomC_VisiteOrganisee.lower() :
                 numC_VisiteOrganisee.append(str(i))#stocke chaque numéro de colone relevé
 
+#Création des listes et dictionnaires globaux
+EnvoiJSON = {}
+date = str(datetime.datetime.today().strftime("%d/%m/%Y"))
+EnvoiJSON["dateDonnees"] = date
+ListesParcs = []
 for i in range(3,nb_lignes):
     #Initialisation des Variables de données
     NbVisitesOrganisees = 0
@@ -129,14 +135,22 @@ for i in range(3,nb_lignes):
 
     DictionnaireMateriel = {}
     DictionnaireMateriel["borneSimple"]=DictionnaireBorneSimple
-    DictionnaireMateriel["borneSimple"]=DictionnaireBorneSimple
+    DictionnaireMateriel["borneDouble"]=DictionnaireBorneDouble
+    DictionnaireMateriel["armoire"]=DictionnaireArmoires
     #Dictionnaire Parc
     DictionnaireParc = {}
     DictionnaireParc["departement"] = Departement
-    DictionnaireParc["dateMiseEnService"] = DateMiseEnService
+    DictionnaireParc["dateMiseEnService"] = str(DateMiseEnService.strftime("%d/%m/%Y"))
     DictionnaireParc["periodiciteEnMois"] = Periodicite
     DictionnaireParc["nbVisitesOrganisees"] = NbVisitesOrganisees
     DictionnaireParc["nbDemiJoursTravail"] = NbDemiJournees
     DictionnaireParc["contact"] = DictionnaireContact
     DictionnaireParc["materiel"] = DictionnaireMateriel
+    DictionnaireParc["nomEntreprise"] = Entreprise
+    DictionnaireParc["adresse"] = Adresse
 
+    ListesParcs.append(DictionnaireParc)
+
+EnvoiJSON["parcs"] = ListesParcs
+out_file = open("data.json", "w")
+json.dump(EnvoiJSON,out_file)
