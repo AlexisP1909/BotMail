@@ -23,7 +23,7 @@ def ExcelToPython(Variables):
 
     # Obtenez le répertoire de travail actuel
     repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
-    # Créez le chemin relatif en combinant le répertoire de travail et le nom du fichier
+    # Créez le chemin absolu en combinant le répertoire de travail et le nom du fichier
     chemin_fichier = os.path.join(repertoire_actuel, nom_fichier)
 
     # Load the Excel workbook

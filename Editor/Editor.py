@@ -1,4 +1,4 @@
-import openpyxl, json, ast
+import json, ast, os
 from datetime import datetime
 from enum import Enum
 from dateutil.relativedelta import relativedelta
@@ -8,6 +8,9 @@ periodeEntretienEnMois = 3
 typeMateriel = {"borneSimple":"borne simple",
                 "borneDouble": "borne double",
                 "armoire": "armoire"}
+
+# Obtenez le répertoire de travail actuel
+repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
 
 class Urgence(Enum):
     organise = "organise"
@@ -84,10 +87,6 @@ def parseInputData(data):
                 parc["urgence"]=Urgence.pasUrgent.value # L'entretien est considéré comme pas urgent
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
                 parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
-        #Code pour comparer deux dates
-        """diffTemps = diff_date(date_entretien,dateDonneesFormate)
-        print(f"Différence de temps entre les deux dates {dateDonneesFormate} et {date_entretien} : {diffTemps}")
-        print(f"Différence en mois {diffTemps.years*12+diffTemps.months}")"""
     return parcs, dateDonneesFormate    
 
 def trierParcs(donneesParcs):
@@ -140,6 +139,7 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     """
     Fonction qui crée l'HTML de l'email en récupérant le template "html_template.thml" et y ajoute les informations parsés
     ENTREE: dicoParcs (dict) Dictionnaire des parcs, rangé selon la région et l'importance
+    SORTIE: html_final (str) L'HTML de l'email
     """
     with open(pathHTMLBrut,"r", encoding="utf8") as file:
         html_brut = file.read()
@@ -152,21 +152,21 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     html_final = html_final.replace("<!--DATE1-->", dateDonnees.strftime('%d %m %Y'))
     html_final = html_final.replace("<!--DATE2-->", (dateDonnees+ relativedelta(months=periodeEntretienEnMois)).strftime('%d %m %Y'))
     return html_final
-    
+
+def create_html_content(jsonFileName):
+    """
+    Fonction qui pour un nom de fichier JSON donné (qui doit être dans le même dossier que Editor.py) revoie l'HTML du mail correspondant
+    ENTREE: jsonFileName (str) Le nom du fichier JSON contenant l'information (au format "nomDeFichier.json")
+    SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère 
+    """
+    donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
+    listeParcs, dateDonnees = parseInputData(donneesEntrees)    
+    print("LISTE DES PARCS", listeParcs)
+    dictParcsTrie = trierParcs(listeParcs)
+    html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
+    return html_content
+
 refRegion("Editor\\departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
-
-def create_html_content(jsonDataPath):
-    donneesEntrees = readJSON(jsonDataPath)   # "Editor\\sample_ParserToEditor.json"
-    listeParcs, dateDonnees = parseInputData(donneesEntrees)    
-    print("LISTE DES PARCS", listeParcs)
-    dictParcsTrie = trierParcs(listeParcs)
-    html_content = createHTML(dictParcsTrie, dateDonnees, "Editor\\html_template.html")
-    print(html_content)
-
 if __name__ == "__main__":
-    donneesEntrees = readJSON("data.json")   # "Editor\\sample_ParserToEditor.json"
-    listeParcs, dateDonnees = parseInputData(donneesEntrees)    
-    print("LISTE DES PARCS", listeParcs)
-    dictParcsTrie = trierParcs(listeParcs)
-    html_content = createHTML(dictParcsTrie, dateDonnees, "Editor\\html_template.html")
+    html_content = create_html_content("data.json")
     print(html_content)
