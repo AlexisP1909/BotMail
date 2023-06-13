@@ -5,6 +5,7 @@ import json
 import os
 from ExcelToJson import ExcelToPython
 from Editor import create_html_content
+from Sender import EnvoiMail
 VariablesExcelToPython= {}
 VariablesExcelToPython["Nom_Feuille"] = "Clients"
 VariablesExcelToPython["NuméroLigneEnTetes"] = 2
@@ -22,7 +23,15 @@ VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
 VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
 VariablesExcelToPython["nom_fichier"] = "PlanningSandbox.xlsx"
 VariablesExcelToPython["nom_fichierj"] = "data.json"
+
+VariablesEnvoiMail = {}
+VariablesEnvoiMail["smtp_server"] = 'smtp.gmail.com'
+VariablesEnvoiMail["port"] = 465
+VariablesEnvoiMail["destinateur"] = 'alexis.pouillieute@gmail.com'
+VariablesEnvoiMail["password"] = 'eramkhznecqpnuob'
+VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr','nicolas.gorgette@epfedu.fr']
+
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
-    a = create_html_content(VariablesExcelToPython["nom_fichierj"])
-    print(a)
+    VariablesEnvoiMail["html_content"] = create_html_content(VariablesExcelToPython["nom_fichierj"])
+    EnvoiMail(VariablesEnvoiMail)
