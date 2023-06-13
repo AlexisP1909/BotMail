@@ -7,7 +7,7 @@ periodeEntretienEnMois = 3
 
 typeMateriel = {"borneSimple":"borne simple",
                 "borneDouble": "borne double",
-                "armoire": "armoire"}
+                "armoire": "armoire"}   
 
 # Obtenez le répertoire de travail actuel
 repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
