@@ -62,14 +62,15 @@ def parseInputData(data):
     dateDonneesFormate = strToDate(dateDonnees) # On convertit la date de "str" vers le type "date"
     parcs = data["parcs"] #Liste de dictonnaires, chaque dictionnaire est un parc
     for parc in parcs[:]: # Pour chaque parc (dans une liste copie)
-        parc["region"] = findRegion(str(parc["departement"])) # Ajout de la propriété "region"
         # La formule de la date de l'entretien prévu est : dateEntretien = dateMiseEnService + periodiciteEnMois*nbVisitesOrganisees
         date_entretien_organise = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(parc["nbVisitesOrganisees"]))
         if(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien_organise and date_entretien_organise>=dateDonneesFormate):#Si la date de l'entretien organisé est entre aujourd'hui et dans periodeEntretienEnMois mois
             parc["urgence"] = Urgence.organise.value # La visite dans les periodeEntretienEnMois mois est organisée, elle est donc pas du tout urgente à prévoir
+            parc["dateEntretien"] = date_entretien_organise
         else:# La visite dans les trois mois n'est pas organisée             
             # La formule de la date du prochain l'entretien est : dateEntretien = dateMiseEnService + periodiciteEnMois* (nbVisitesOrganisees+1)
             date_entretien = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(1+parc["nbVisitesOrganisees"])) # On détermine la date de l'intervention à venir
+            parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
                 parc["urgence"]=Urgence.dramatique #L'entretien est en retard
             elif(dateDonneesFormate+relativedelta(months=1)>=date_entretien): #Si la date de l'entretien est dans un mois (ou moins, mais pas en retard)
@@ -78,31 +79,56 @@ def parseInputData(data):
                 parc["urgence"]=Urgence.pasUrgent.value # L'entretien est considéré comme pas urgent
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
                 parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
-
         #Code pour comparer deux dates
         """diffTemps = diff_date(date_entretien,dateDonneesFormate)
         print(f"Différence de temps entre les deux dates {dateDonneesFormate} et {date_entretien} : {diffTemps}")
         print(f"Différence en mois {diffTemps.years*12+diffTemps.months}")"""
+    return parcs    
 
-    print(parcs)
+def trierParcs(donneesParcs):
+    dictParcs = {}
+    for parc in donneesParcs: # Tri des parcs par région
+        regionDuParc = findRegion(str(parc["departement"])) # On récupère la région du parc
+        if regionDuParc in dictParcs.keys():# Si la région est déjà présente dans le dictionnaire des parcs
+            dictParcs.get(regionDuParc).append(parc) # On ajoute le parc à sa région dans le dictionnaire
+        else: # La région n'est pas encore présente dans le dictionnaire des parcs
+            dictParcs[regionDuParc]=[parc] # On crée la région dans le doctionnaire et on y ajoute le parc
+    for parcs in dictParcs.values(): # Tri des parcs par date croissantes pour chaque région
+        parcs.sort(key=lambda x: x["dateEntretien"]) # Trier les parcs selon la date de l'entretien
+        for i, parc in enumerate(parcs[:]):
+            if parc["urgence"]==Urgence.organise.value: parcs.append(parcs.pop(i)) # Si un parc est d'urgence "organise" on l'ajoute à la fin de la liste
+    
+    print(dictParcs)
+    return dictParcs
     
 def createMaterielHTML(materiels):
     for materiel in materiels:
-        if
+        print(materiel)
+    return "test"
 
 def createParkHTML(parc):
-    pass
+    return f"<tr><td class=\"{parc['urgence']}\">{parc['dateEntretien'].strftime('%d %m %Y')}</td><td>{createMaterielHTML(parc['materiel'])}</td><td>{parc['nomEntreprise']}</td><td>{parc['nomEntreprise']}</td></tr>"
+
+def createHTML(dicoParcs):
+    htmlData = ""
+    for region, parcs in dicoParcs.items(): 
+        htmlData+=f"<tr><th colspan=\"6\">{region}</th></tr>"
+        for parc in parcs: htmlData+=createParkHTML(parc)
+    return htmlData
+    
 
 
 nomRegion = "PACA"
-titreLigne = f"<tr><th colspan=\"4\">{nomRegion}</th></tr>"
+titreLigne = f"<tr><th colspan=\"6\">{nomRegion}</th></tr>"
 print(titreLigne)
 
 refRegion("Editor\\departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
-
 if __name__ == "__main__":
     donneesEntrees = readJSON("Editor\\sample_ParserToEditor.json")    
-    parseInputData(donneesEntrees)
+    listeParcs = parseInputData(donneesEntrees)
+    dictParcsTrie = trierParcs(listeParcs)
+    finalHTML = createHTML(dictParcsTrie)
+    print(finalHTML)
     
 """
 datas = {
