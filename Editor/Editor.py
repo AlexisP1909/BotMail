@@ -64,7 +64,7 @@ def diff_date(date1, date2): return relativedelta(date1, date2) #Fonction qui re
 
 def parseInputData(data):
     """
-    Fonction qui pour des données en entrée (data) 
+    Fonction qui pour des données en entrée (data) renvoie une liste de parcs et la date de l'envoi des données
     """
     dateDonnees = data["dateDonnees"]
     dateDonneesFormate = strToDate(dateDonnees) # On convertit la date de "str" vers le type "date"
@@ -90,6 +90,11 @@ def parseInputData(data):
     return parcs, dateDonneesFormate    
 
 def trierParcs(donneesParcs):
+    """
+    Fonction qui trie une liste de parcs en un dictionnaire, en fonction des régions, des dates dates les plus récentes, et des régions avec le plus de 1/2 journées de travail
+    ENTREE: donneesParcs (liste) Liste contenant différents parcs (devant contenir au moins les clés "departement", "dateEntretien", "urgence" et "nbDemiJoursTravail")
+    SORTIE: dictParcsRange (dict) Dictionnaire des parcs rangés, et classés par régions (clé=région, valeur=liste de parcs)
+    """
     dictParcs = {}
     for parc in donneesParcs: # Tri des parcs par région
         regionDuParc = findRegion(str(parc["departement"])) # On récupère la région du parc
@@ -103,7 +108,7 @@ def trierParcs(donneesParcs):
             if parc["urgence"]==Urgence.organise.value: parcs.append(parcs.pop(i)) # Si un parc est d'urgence "organise" on l'ajoute à la fin de la liste
     listeTotaux = []
     i = 0
-    for nomRegion, parcs in dictParcs.items():# Tri des région selon celle qui a le plus de demi-journées de travail
+    for nomRegion, parcs in dictParcs.items():# Tri des régions selon celle qui a le plus de demi-journées de travail
         total = 0
         for parc in parcs: total+=int(parc["nbDemiJoursTravail"])
         listeTotaux.append((i, total))
