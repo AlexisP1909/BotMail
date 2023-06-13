@@ -24,4 +24,5 @@ VariablesExcelToPython["nom_fichier"] = "PlanningSandbox.xlsx"
 VariablesExcelToPython["nom_fichierj"] = "data.json"
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
-    create_html_content(VariablesExcelToPython["nom_fichierj"])
+    a = create_html_content(VariablesExcelToPython["nom_fichierj"])
+    print(a)

@@ -7,8 +7,8 @@ html_content=""
 
 smtp_server = 'smtp.gmail.com'
 port = 465
-destinateur = ''
-password = ''                        #mdp généré avec gmail
+destinateur = 'alexis.pouillieute@gmail.com'
+password = 'GMAAlexis2002-'                        #mdp généré avec gmail
 destinataire = 'alexis.pouillieute@epfedu.fr'
 
 message = MIMEMultipart()

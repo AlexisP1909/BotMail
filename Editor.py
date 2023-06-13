@@ -161,12 +161,11 @@ def create_html_content(jsonFileName):
     """
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
-    print("LISTE DES PARCS", listeParcs)
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
     return html_content
 
-refRegion("departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
+refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
 if __name__ == "__main__":
     html_content = create_html_content("data.json")
     print(html_content)
