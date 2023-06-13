@@ -154,6 +154,15 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     return html_final
     
 refRegion("Editor\\departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
+
+def create_html_content(jsonDataPath):
+    donneesEntrees = readJSON(jsonDataPath)   # "Editor\\sample_ParserToEditor.json"
+    listeParcs, dateDonnees = parseInputData(donneesEntrees)    
+    print("LISTE DES PARCS", listeParcs)
+    dictParcsTrie = trierParcs(listeParcs)
+    html_content = createHTML(dictParcsTrie, dateDonnees, "Editor\\html_template.html")
+    print(html_content)
+
 if __name__ == "__main__":
     donneesEntrees = readJSON("data.json")   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
