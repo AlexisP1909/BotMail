@@ -166,7 +166,7 @@ def create_html_content(jsonFileName):
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
     return html_content
 
-refRegion("Editor\\departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
+refRegion("departements.json") # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
 if __name__ == "__main__":
     html_content = create_html_content("data.json")
     print(html_content)

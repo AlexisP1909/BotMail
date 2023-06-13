@@ -5,21 +5,21 @@ import json
 import os
 def ExcelToPython(Variables):   
     #Variables 
-    Nom_Feuille = Variables[1]
-    NuméroLigneEnTetes = Variables[2]
-    NomC_Entreprise = Variables[3]
-    NomC_BornesSimpl = Variables[4]
-    NomC_BornesDoubles = Variables[5]
-    NomC_Armoires = Variables[6]
-    NomC_NbDemiJournees = Variables[7]
-    NomC_Adresse = Variables[8]
-    NomC_Departement = Variables[9]
-    NomC_Contact = Variables[10]
-    NomC_DateMiseEnService = Variables[11]
-    NomC_Periodicite = Variables[12]
-    NomC_VisiteOrganisee = Variables[13]
-    nom_fichier = Variables[14]
-    nom_fichierj = Variables[15]
+    Nom_Feuille = Variables["Nom_Feuille"]
+    NuméroLigneEnTetes = Variables["NuméroLigneEnTetes"]
+    NomC_Entreprise = Variables["NomC_Entreprise"]
+    NomC_BornesSimpl = Variables["NomC_BornesSimpl"]
+    NomC_BornesDoubles = Variables["NomC_BornesDoubles"]
+    NomC_Armoires = Variables["NomC_Armoires"]
+    NomC_NbDemiJournees = Variables["NomC_NbDemiJournees"]
+    NomC_Adresse = Variables["NomC_Adresse"]
+    NomC_Departement = Variables["NomC_Departement"]
+    NomC_Contact = Variables["NomC_Contact"]
+    NomC_DateMiseEnService = Variables["NomC_DateMiseEnService"]
+    NomC_Periodicite = Variables["NomC_Periodicite"]
+    NomC_VisiteOrganisee = Variables["NomC_VisiteOrganisee"]
+    nom_fichier = Variables["nom_fichier"]
+    nom_fichierj = Variables["nom_fichierj"]
 
     # Obtenez le répertoire de travail actuel
     repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
