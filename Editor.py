@@ -170,6 +170,7 @@ def create_html_content(jsonFileName):
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
+    print(type(html_content))
     return html_content
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale dictRegions

@@ -8,7 +8,7 @@ def EnvoiMail(Variables):
     destinateur = Variables["destinateur"]
     password = Variables["password"]                        #mdp généré avec gmail
     destinataire = Variables["destinataire"]
-
+    
     message = MIMEMultipart()
 
     html_part = MIMEText(html_content, 'html')
@@ -16,11 +16,11 @@ def EnvoiMail(Variables):
 
     message['Subject'] = 'Maintenances à planifier'    #objet du mail
     message['From'] = destinateur              #destinateur du mail
-    message['To'] = destinataire               #destinataire du mail
+    message['To'] = ", ".join(destinataire)               #destinataire du mail
 
-    context = ssl.create_default_context()     
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(destinateur, password)             #connexion au serveur Gmail
-        server.sendmail(destinateur, destinataire, message)    #envoie le mail
-        print("ENVOYE")
+    server = smtplib.SMTP_SSL(smtp_server, port) 
+    server.ehlo()
+    server.login(destinateur, password)             #connexion au serveur Gmail
+    server.sendmail(destinateur, destinataire, message.as_string())    #envoie le mail
+    print("ENVOYE")
     server.quit()
