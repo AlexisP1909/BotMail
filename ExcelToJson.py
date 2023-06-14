@@ -1,9 +1,7 @@
 import pandas as pd
 from openpyxl import load_workbook
-import datetime
-import json
-import os
-import re
+import datetime,json, os, re
+
 def ExcelToPython(Variables):   
     #Variables 
     Nom_Feuille = Variables["Nom_Feuille"]
@@ -111,7 +109,7 @@ def ExcelToPython(Variables):
         try:
             Contact = df.iloc[i,numC_Contact].split()
         except AttributeError as e :
-            Contact[1,2,3]=None
+            Contact=[]
         DateMiseEnService = df.iloc[i,numC_DateMiseEnService]
         Periodicite = df.iloc[i,numC_Periodicite]
 
