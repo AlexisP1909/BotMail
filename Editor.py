@@ -50,7 +50,7 @@ def findRegion(departement):
     departement=''.join(x for x in departement if x.isdigit())
     if len(departement) == 1: departement = f"0{departement}" # Si le département est composé d'un seul chiffre et est donné comme tel dans l'input, on ajoute un 0 devant   
     for region, depts in dictRegions.items():
-        print(f"Departement cherché {departement} dans liste: {depts}")
+        # print(f"Departement cherché {departement} dans liste: {depts}")
         if departement in depts: return region
     
     print(f"ERROR : AUCUNE REGION TROUVEE POUR LE DEPT. \"{departement}\"")
@@ -111,16 +111,15 @@ def trierParcs(donneesParcs):
         for i, parc in enumerate(parcs[:]):
             if parc["urgence"]==Urgence.organise.value: parcs.append(parcs.pop(i)) # Si un parc est d'urgence "organise" on l'ajoute à la fin de la liste
     listeTotaux = []
-    i = 0
+    i = 0 # Indice correspondant au parc
     for nomRegion, parcs in dictParcs.items():# Tri des régions selon celle qui a le plus de demi-journées de travail
-        total = 0
+        total = 0 #Nb demi-journées de travail
         for parc in parcs: total+=int(parc["nbDemiJoursTravail"])
         listeTotaux.append((i, total))
         i+=1
-    print("Liste du nouvel ordre", listeTotaux)
+    #print("Liste du nouvel ordre", listeTotaux) # Le premier nombres est l'indice de la i-ème région, le deuxième chiffre est le total de ses demi-journées de travail
     ordreJoursTrav = [x[0] for x in sorted(listeTotaux, key=lambda tup: tup[1], reverse=True)]
-    dictParcsRange = {list(dictParcs.keys())[i]:list(dictParcs.values())[i] for i in ordreJoursTrav}    
-    print(dictParcsRange)
+    dictParcsRange = {list(dictParcs.keys())[i]:list(dictParcs.values())[i] for i in ordreJoursTrav}
     return dictParcsRange
     
 def createMaterielHTML(materiels):
@@ -169,7 +168,6 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     for region, parcs in dicoParcs.items(): 
         htmlData+=f"<tr><th colspan=\"6\">{region}</th></tr>"
         for parc in parcs: htmlData+=createParkHTML(parc)
-    print("HTML créé", htmlData)
     html_final = html_brut.replace("<!-- INSERER TABLEAU -->", htmlData)
     html_final = html_final.replace("<!--DATE1-->", dateDonnees.strftime('%d %m %Y'))
     html_final = html_final.replace("<!--DATE2-->", (dateDonnees+ relativedelta(months=periodeEntretienEnMois)).strftime('%d %m %Y'))
