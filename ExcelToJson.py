@@ -91,6 +91,7 @@ def ExcelToPython(Variables):
     date = str(datetime.datetime.today().strftime("%d/%m/%Y"))#date d'aujourd'hui convertie en string
     EnvoiJSON["dateDonnees"] = date
     ListesParcs = []
+    
     for i in range(3,nb_lignes):
         #Initialisation des Variables de données
         NbVisitesOrganisees = 0
@@ -128,41 +129,42 @@ def ExcelToPython(Variables):
                             DictionnaireContact["email"] = Contact[3]
 
 
-    DictionnaireBorneSimple = {}
-    if(len(BornesSimpl)>0):
-        DictionnaireBorneSimple["nb"] = BornesSimpl[0]
-        if(len(BornesSimpl)>1):
-          DictionnaireBorneSimple["type"] = BornesSimpl[1]
+        DictionnaireBorneSimple = {}
+        if(len(BornesSimpl)>0):
+            DictionnaireBorneSimple["nb"] = BornesSimpl[0]
+            if(len(BornesSimpl)>1):
+             DictionnaireBorneSimple["type"] = BornesSimpl[1]
    
-    DictionnaireBorneDouble = {}
-    if(len(BornesDoubles)>0):
-        DictionnaireBorneDouble["nb"] = BornesDoubles[0]
-        if(len(BornesDoubles)>1):
-            DictionnaireBorneDouble["type"] = BornesDoubles[1]
-    
-    DictionnaireArmoires = {}
-    if(len(Armoires)>0):
-        DictionnaireArmoires["nb"] = Armoires[0]
-        if(len(Armoires)>1):
-            DictionnaireArmoires["type"] = Armoires[1]
+        DictionnaireBorneDouble = {}
+        if(len(BornesDoubles)>0):
+            DictionnaireBorneDouble["nb"] = BornesDoubles[0]
+            if(len(BornesDoubles)>1):
+                DictionnaireBorneDouble["type"] = BornesDoubles[1]
+        
+        DictionnaireArmoires = {}
+        if(len(Armoires)>0):
+            DictionnaireArmoires["nb"] = Armoires[0]
+            if(len(Armoires)>1):
+                DictionnaireArmoires["type"] = Armoires[1]
 
-        DictionnaireMateriel = {}
-        DictionnaireMateriel["borneSimple"]=DictionnaireBorneSimple
-        DictionnaireMateriel["borneDouble"]=DictionnaireBorneDouble
-        DictionnaireMateriel["armoire"]=DictionnaireArmoires
-        #Dictionnaire Parc
-        DictionnaireParc = {}
-        DictionnaireParc["departement"] = Departement
-        DictionnaireParc["dateMiseEnService"] = str(DateMiseEnService.strftime("%d/%m/%Y"))
-        DictionnaireParc["periodiciteEnMois"] = Periodicite
-        DictionnaireParc["nbVisitesOrganisees"] = NbVisitesOrganisees
-        DictionnaireParc["nbDemiJoursTravail"] = NbDemiJournees
-        DictionnaireParc["contact"] = DictionnaireContact
-        DictionnaireParc["materiel"] = DictionnaireMateriel
-        DictionnaireParc["nomEntreprise"] = Entreprise
-        DictionnaireParc["adresse"] = Adresse
-
-        ListesParcs.append(DictionnaireParc)#On ajoute le dictionnaire du parc en cours à la liste des parcs
+            DictionnaireMateriel = {}
+            DictionnaireMateriel["borneSimple"]=DictionnaireBorneSimple
+            DictionnaireMateriel["borneDouble"]=DictionnaireBorneDouble
+            DictionnaireMateriel["armoire"]=DictionnaireArmoires
+            #Dictionnaire Parc
+            DictionnaireParc = {}
+            DictionnaireParc["departement"] = Departement
+            DictionnaireParc["dateMiseEnService"] = str(DateMiseEnService.strftime("%d/%m/%Y"))
+            DictionnaireParc["periodiciteEnMois"] = Periodicite
+            DictionnaireParc["nbVisitesOrganisees"] = NbVisitesOrganisees
+            DictionnaireParc["nbDemiJoursTravail"] = NbDemiJournees
+            DictionnaireParc["contact"] = DictionnaireContact
+            DictionnaireParc["materiel"] = DictionnaireMateriel
+            DictionnaireParc["nomEntreprise"] = Entreprise
+            DictionnaireParc["adresse"] = Adresse
+            print(i,nb_lignes)
+            print(DictionnaireParc)
+            ListesParcs.append(DictionnaireParc)#On ajoute le dictionnaire du parc en cours à la liste des parcs
 
     EnvoiJSON["parcs"] = ListesParcs #On ajoute les parcs au Json 
 
