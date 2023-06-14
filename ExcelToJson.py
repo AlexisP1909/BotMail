@@ -108,9 +108,10 @@ def ExcelToPython(Variables):
 
         Adresse = df.iloc[i,numC_Adresse]
         Departement = df.iloc[i,numC_Departement]
-
-        Contact = df.iloc[i,numC_Contact].split()
-
+        try:
+            Contact = df.iloc[i,numC_Contact].split()
+        except AttributeError as e :
+            Contact[1,2,3]=None
         DateMiseEnService = df.iloc[i,numC_DateMiseEnService]
         Periodicite = df.iloc[i,numC_Periodicite]
 

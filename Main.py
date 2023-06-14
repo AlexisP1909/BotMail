@@ -2,8 +2,10 @@ from ExcelToJson import ExcelToPython
 from Editor import create_html_content
 from Sender import EnvoiMail
 VariablesExcelToPython= {}
+#Variables Excel
 VariablesExcelToPython["Nom_Feuille"] = "Clients"
 VariablesExcelToPython["NuméroLigneEnTetes"] = 2
+#Variables 
 VariablesExcelToPython["NomC_Entreprise"] = "Entreprise"
 VariablesExcelToPython["NomC_BornesSimpl"] = "Bornes Simples"
 VariablesExcelToPython["NomC_BornesDoubles"] = "Bornes Doubles"
