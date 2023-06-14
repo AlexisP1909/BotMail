@@ -17,8 +17,7 @@ VariablesExcelToPython["NomC_Contact"] = "Contact"
 VariablesExcelToPython["NomC_DateMiseEnService"] = "Date de mise en service"
 VariablesExcelToPython["NomC_Periodicite"] = "Périodicité en mois"
 VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
-VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
-VariablesExcelToPython["nom_fichier"] = "PlanningSandbox.xlsx"
+VariablesExcelToPython["nom_fichier"] = "Planning d'intervention Maintenance POUR TESTS.xlsx"
 VariablesExcelToPython["nom_fichierj"] = "data.json"
 
 VariablesEnvoiMail = {}
@@ -26,7 +25,7 @@ VariablesEnvoiMail["smtp_server"] = 'smtp.gmail.com'
 VariablesEnvoiMail["port"] = 465
 VariablesEnvoiMail["destinateur"] = 'alexis.pouillieute@gmail.com'
 VariablesEnvoiMail["password"] = 'eramkhznecqpnuob'
-VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
+VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr','nicolas.gorgette@epfedu.fr']
 
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
