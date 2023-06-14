@@ -37,7 +37,7 @@ def readJSON(JSONFile):
     try:
         with open(JSONFile,"r", encoding="utf8") as file:
             data = json.load(file)
-        #print(data)
+        print(data)
         return data
         
     except:

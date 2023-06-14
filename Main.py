@@ -24,7 +24,7 @@ VariablesEnvoiMail["smtp_server"] = 'smtp.gmail.com'
 VariablesEnvoiMail["port"] = 465
 VariablesEnvoiMail["destinateur"] = 'alexis.pouillieute@gmail.com'
 VariablesEnvoiMail["password"] = 'eramkhznecqpnuob'
-VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr','nicolas.gorgette@epfedu.fr']
+VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
 
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
