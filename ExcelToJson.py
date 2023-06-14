@@ -169,8 +169,6 @@ def ExcelToPython(Variables):
             DictionnaireParc["materiel"] = DictionnaireMateriel
             DictionnaireParc["nomEntreprise"] = Entreprise
             DictionnaireParc["adresse"] = Adresse
-            print(i,nb_lignes)
-            print(DictionnaireParc)
             ListesParcs.append(DictionnaireParc)#On ajoute le dictionnaire du parc en cours à la liste des parcs
 
     EnvoiJSON["parcs"] = ListesParcs #On ajoute les parcs au Json 
