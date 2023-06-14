@@ -99,10 +99,20 @@ def ExcelToPython(Variables):
 
         #Variables pour la lisibilité et traitement
         Entreprise = df.iloc[i,numC_Entreprise]
+        try :
+            BornesSimpl = re.split("[()]",df.iloc[i,numC_BornesSimpl])
+        except AttributeError as e:
+            BornesSimpl = None
+        try :    
+            BornesDoubles = re.split("[()]",df.iloc[i,numC_BornesDoubles])
+        except AttributeError as e:
+            BornesDoubles = None
+        try :
+            Armoires = re.split("[()]",df.iloc[i,numC_Armoires])
+        except AttributeError as e :
+            Armoires = None
+        
 
-        BornesSimpl = re.split("[()]",str(df.iloc[i,numC_BornesSimpl]))
-        BornesDoubles = re.split("[()]",str(df.iloc[i,numC_BornesDoubles]))
-        Armoires = re.split("[()]",str(df.iloc[i,numC_Armoires]))
 
         NbDemiJournees = df.iloc[i,numC_NbDemiJournes]
 
