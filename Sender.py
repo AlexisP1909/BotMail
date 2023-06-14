@@ -3,7 +3,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 def EnvoiMail(Variables):
     html_content=Variables["html_content"]
-
     smtp_server = Variables["smtp_server"]
     port = Variables["port"]
     destinateur = Variables["destinateur"]
