@@ -3,16 +3,15 @@ from datetime import datetime
 from enum import Enum
 from dateutil.relativedelta import relativedelta
 
-periodeEntretienEnMois = 3
+periodeEntretienEnMois = 3 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
-typeMateriel = {"borneSimple":"borne simple",
+typeMateriel = {"borneSimple":"borne simple", 
                 "borneDouble": "borne double",
-                "armoire": "armoire"}   
+                "armoire": "armoire"} # Noms des matériels selon leurs clés  
 
-# Obtenez le répertoire de travail actuel
-repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
+repertoire_actuel = os.path.dirname(os.path.abspath(__file__)) # Répertoire de travail actuel
 
-class Urgence(Enum):
+class Urgence(Enum): # Noms des urgences selon leurs clés, organisés en enums
     organise = "organise"
     pasUrgent = "pasUrgent"
     urgent = "urgent"
@@ -34,10 +33,9 @@ def readJSON(JSONFile):
     ENTREE: JSONFile (str) Path du fichier JSON
     SORTIE: data (dict) Dictionnaire correspondant au contenu du fichier JSON lu
     """
-    try:
+    try: #Ouverture et lecture du fichier JSON
         with open(JSONFile,"r", encoding="utf8") as file:
             data = json.load(file)
-        #print(data)
         return data
         
     except:
@@ -65,6 +63,11 @@ def diff_date(date1, date2): return relativedelta(date1, date2) #Fonction qui re
 def parseInputData(data):
     """
     Fonction qui pour des données en entrée (data) renvoie une liste de parcs et la date de l'envoi des données
+    ENTREE: data (dict) Dictionnaire qui contient les données des parcs, 
+            contenant au minimum {"dateDonnees":unString, 
+                                  "parcs":[{"dateMiseEnService":"unString","periodiciteEnMois":"unInt", "nbVisitesOrganisees":"unInt"}]}
+    SORTIE: parcs (list) Liste de parcs, à laquelle on a ajouté les valeurs "urgence":"unStringSPECIFIQUE" et "dateEntretien":"unString" pour chaque parc
+            dateDonneesFormate (datetime) Date de l'envoi des données (extraite de data reçu en entrée)
     """
     dateDonnees = data["dateDonnees"]
     dateDonneesFormate = strToDate(dateDonnees) # On convertit la date de "str" vers le type "date"
@@ -86,6 +89,7 @@ def parseInputData(data):
             elif(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien): #Si la date de l'entretien est dans periodeEntretienEnMois mois (ou moins, mais pas sous 1 mois ou retard)
                 parc["urgence"]=Urgence.pasUrgent.value # L'entretien est considéré comme pas urgent
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
+                print(f"Le parc de {parc['nomEntreprise']} (mis en service le {parc['dateMiseEnService']}) n'a pas d'entretiens dans les {periodeEntretienEnMois} mois")
                 parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
     return parcs, dateDonneesFormate    
 
@@ -120,6 +124,11 @@ def trierParcs(donneesParcs):
     return dictParcsRange
     
 def createMaterielHTML(materiels):
+    """
+    Fonction qui récupère un liste de materiels et qui renvoie en sortie ses informations formatées en string d'HTML
+    ENTREE: materiels (dict) Dictionnaire des materiels de forme {"borneSimple":[nb:"unStrConvertibleEnInt", "type":"unString"],"borneDouble":[nb:"unStrConv...", "type":"unString"],"armoire":[nb:"unStrConv...", "type":"unString"]}
+    SORTIE: String d'HTML qui regroupe les informations des materiels données en entrée
+    """
     html = []
     for materiel, details in materiels.items():
         if details['nb']==0: continue
@@ -129,6 +138,12 @@ def createMaterielHTML(materiels):
     return "<br>".join(html)
 
 def createParkHTML(parc):
+    """
+    Fonction qui, pour un dict des infos d'un parc, renvoie en string d'HTML contenant ces infos
+    ENTREE: parc (dict) Dictionnaire des infos du parc, contenant au moins les clés "urgence", "dateEntretien", "materiel", "nbDemiJoursTravail", "nomEntreprise", "contact" et "adresse" 
+                        (ainsi que les autres clés nécessaires dans la fonction "createMaterielHTML")
+    SORTIE: String d'HTML qui regroupe les informations du parc données en entrée
+    """
     infoSupDate = ""
     if parc['urgence']==Urgence.organise.value: infoSupDate = "<br>organisée"
     elif parc['urgence']==Urgence.dramatique.value: infoSupDate = "<br>en retard"
@@ -173,7 +188,8 @@ def create_html_content(jsonFileName):
     print(type(html_content))
     return html_content
 
-refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale dictRegions
-if __name__ == "__main__":
-    html_content = create_html_content("data.json")
+refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
+
+if __name__ == "__main__": # Code principal lancé lorsque Editor.py est exécuté seul
+    html_content = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
     print(html_content)
