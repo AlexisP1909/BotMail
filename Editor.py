@@ -78,6 +78,7 @@ def parseInputData(data):
 
         try: strToDate(parc["dateMiseEnService"]) # On s'assure que la dateMiseEnService existe
         except TypeError: #Si elle n'exsiste pas, on le signale et on passe au parc suivant
+            global errorInInputData
             errorInInputData = True
             print(f"Le parc de {parc['nomEntreprise']} n'a pas de date de mise en service")
             parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
@@ -187,7 +188,7 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     html_final = html_brut.replace("<!-- INSERER TABLEAU -->", htmlData)
     html_final = html_final.replace("<!--DATE1-->", dateDonnees.strftime('%d %m %Y'))
     html_final = html_final.replace("<!--DATE2-->", (dateDonnees+ relativedelta(months=periodeEntretienEnMois)).strftime('%d %m %Y'))
-    if errorInInputData: html_final+="<div>Un problème a été rencontré dans la base de données: Verifier la justesse des informations</div>"
+    if errorInInputData:html_final = html_final.replace("<!-- INSERER COMMENTAIRE -->", "Un problème a été rencontré dans la base de données: Verifiez la justesse des informations")
     return html_final
 
 def create_html_content(jsonFileName):
@@ -200,8 +201,8 @@ def create_html_content(jsonFileName):
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
-    print(type(html_content))
-    return html_content, dateDonnees.strftime('%d %m %Y')
+    print(html_content)
+    return html_content, dateDonnees
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
 
