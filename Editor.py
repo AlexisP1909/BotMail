@@ -157,10 +157,13 @@ def createParkHTML(parc):
     SORTIE: String d'HTML qui regroupe les informations du parc données en entrée
     """
     infoSupDate = ""
+    touteLigne = ""
     if parc['urgence']==Urgence.organise.value: infoSupDate = "<br>organisée"
-    elif parc['urgence']==Urgence.dramatique.value: infoSupDate = "<br>en retard"
+    elif parc['urgence']==Urgence.dramatique.value: 
+        infoSupDate = "<br>en retard"
+        touteLigne = f"class=\"{parc['urgence']}\"" # Cette variable contient la classe qui sera affectée à toute la ligne du tableau
     nl = "\n"
-    return f"""<tr>
+    return f"""<tr {touteLigne} >
                 <td class=\"{parc['urgence']}\">{parc['dateEntretien'].strftime('%d %m %Y')} {infoSupDate}</td>
                 <td>{createMaterielHTML(parc['materiel'])}</td>
                 <td>{parc['nbDemiJoursTravail']} demi-journée(s) de travail</td>
