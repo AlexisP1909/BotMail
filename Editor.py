@@ -11,6 +11,8 @@ typeMateriel = {"borneSimple":"borne simple",
 
 repertoire_actuel = os.path.dirname(os.path.abspath(__file__)) # Répertoire de travail actuel
 
+errorInInputData = False
+
 class Urgence(Enum): # Noms des urgences selon leurs clés, organisés en enums
     organise = "organise"
     pasUrgent = "pasUrgent"
@@ -73,13 +75,23 @@ def parseInputData(data):
     dateDonneesFormate = strToDate(dateDonnees) # On convertit la date de "str" vers le type "date"
     parcs = data["parcs"] #Liste de dictonnaires, chaque dictionnaire est un parc
     for parc in parcs[:]: # Pour chaque parc (dans une liste copie)
+
+        try: strToDate(parc["dateMiseEnService"]) # On s'assure que la dateMiseEnService existe
+        except TypeError: #Si elle n'exsiste pas, on le signale et on passe au parc suivant
+            errorInInputData = True
+            print(f"Le parc de {parc['nomEntreprise']} n'a pas de date de mise en service")
+            parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
+            continue
+
         # La formule de la date de l'entretien prévu est : dateEntretien = dateMiseEnService + periodiciteEnMois*nbVisitesOrganisees
         date_entretien_organise = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(parc["nbVisitesOrganisees"]))
+    
         if(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien_organise and date_entretien_organise>=dateDonneesFormate):#Si la date de l'entretien organisé est entre aujourd'hui et dans periodeEntretienEnMois mois
             parc["urgence"] = Urgence.organise.value # La visite dans les periodeEntretienEnMois mois est organisée, elle est donc pas du tout urgente à prévoir
             parc["dateEntretien"] = date_entretien_organise
         else:# La visite dans les trois mois n'est pas organisée             
             # La formule de la date du prochain l'entretien est : dateEntretien = dateMiseEnService + periodiciteEnMois* (nbVisitesOrganisees+1)
+            
             date_entretien = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(1+parc["nbVisitesOrganisees"])) # On détermine la date de l'intervention à venir
             parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
@@ -91,6 +103,7 @@ def parseInputData(data):
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
                 print(f"Le parc de {parc['nomEntreprise']} (mis en service le {parc['dateMiseEnService']}) n'a pas d'entretiens dans les {periodeEntretienEnMois} mois")
                 parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
+            
     return parcs, dateDonneesFormate    
 
 def trierParcs(donneesParcs):
@@ -130,7 +143,7 @@ def createMaterielHTML(materiels):
     """
     html = []
     for materiel, details in materiels.items():
-        if details['nb']=="0": continue
+        if details['nb']=="0" or details['nb']=="None": continue
         nomMateriel = typeMateriel[materiel].replace('e','es') if int(details['nb'])>1 else typeMateriel[materiel]
         typeMatos = f"({details['type']})" if 'type' in details else ""
         html.append(f"{details['nb']} {nomMateriel} {typeMatos}")    
@@ -171,6 +184,7 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     html_final = html_brut.replace("<!-- INSERER TABLEAU -->", htmlData)
     html_final = html_final.replace("<!--DATE1-->", dateDonnees.strftime('%d %m %Y'))
     html_final = html_final.replace("<!--DATE2-->", (dateDonnees+ relativedelta(months=periodeEntretienEnMois)).strftime('%d %m %Y'))
+    if errorInInputData: html_final+="<div>Un problème a été rencontré dans la base de données: Verifier la justesse des informations</div>"
     return html_final
 
 def create_html_content(jsonFileName):

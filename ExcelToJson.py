@@ -86,7 +86,7 @@ def ExcelToPython(Variables):
                     numC_Periodicite = i
                 elif df.iloc[NuméroLigneEnTetes,i].lower()==NomC_VisiteOrganisee.lower() :
                     numC_VisiteOrganisee.append(str(i))#stocke chaque numéro de colonne relevé
-
+    print("DateMiseEnService et periodicité:",numC_DateMiseEnService, numC_Periodicite)
     #Création des listes et dictionnaires globaux
     EnvoiJSON = {}
     date = str(datetime.datetime.today().strftime("%d/%m/%Y"))#date d'aujourd'hui convertie en string
@@ -114,7 +114,7 @@ def ExcelToPython(Variables):
             Contact=[]
         DateMiseEnService = df.iloc[i,numC_DateMiseEnService]
         Periodicite = df.iloc[i,numC_Periodicite]
-
+        NbVisitesOrganisees=0
         for j in range(0,len(numC_VisiteOrganisee)-1):
             NbVisitesOrganisees +=1#le nombre de visites organisées depuis la mise en service = le nombre de périodes passées
 

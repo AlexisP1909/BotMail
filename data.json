@@ -1,1 +1,772 @@
-{"dateDonnees": "14/06/2023", "parcs": [{"departement": "Seine-Saint-Denis\n(93)", "dateMiseEnService": "27/07/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 1, "contact": {"prenom": "Albert", "nom": "Albert1"}, "materiel": {"borneSimple": {"nb": "4                ", "type": "ALFEN EVE SINGLE PRO LINE"}, "borneDouble": {"nb": "2 ", "type": "ALFEN "}, "armoire": {"nb": "1"}}, "nomEntreprise": "ENTREPRISE 1", "adresse": "1 rue Albert Albert\n93700, Colombes"}, {"departement": "Yvelines\n(78)", "dateMiseEnService": "03/06/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 1, "contact": {"prenom": "Albert", "nom": "Albert2", "telephone": "01.00.00.00.00", "email": "albert@albert.com"}, "materiel": {"borneSimple": {"nb": "3 ", "type": "ALFEN EVE MINI MURALE"}, "borneDouble": {"nb": "1 ", "type": "ALFEN"}, "armoire": {"nb": "2"}}, "nomEntreprise": "ENTREPRISE 2", "adresse": "2 rue Albert Albert\n78700, Colombes"}, {"departement": "Alpes-Maritimes\n(06)", "dateMiseEnService": "01/07/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 4, "contact": {"prenom": "Albert", "nom": "Albert2"}, "materiel": {"borneSimple": {"nb": "1 ", "type": "ALFEN EVE SINGLE PRO-LINE"}, "borneDouble": {"nb": "0"}, "armoire": {"nb": "0"}}, "nomEntreprise": "ENTREPRISE 3", "adresse": "3 rue Albert Albert\n92700, Colombes"}, {"departement": "Hauts-de-Seine\n(92)", "dateMiseEnService": "17/08/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 2, "contact": {"prenom": "Albert", "nom": "Albert2", "telephone": "01.00.00.00.00", "email": "albert@albert.com"}, "materiel": {"borneSimple": {"nb": "5 ", "type": "ALFEN EVE SINGLE PRO LINE"}, "borneDouble": {"nb": "3 ", "type": "ALFEN "}, "armoire": {"nb": "2"}}, "nomEntreprise": "ENTREPRISE 4", "adresse": "4 rue Albert Albert\n92700, Colombes"}, {"departement": "Alpes-Maritimes\n(06)", "dateMiseEnService": "03/10/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 0, "contact": {"prenom": "Albert", "nom": "Albert3"}, "materiel": {"borneSimple": {"nb": "2 ", "type": "ALFEN EVE SINGLE PRO-LINE"}, "borneDouble": {"nb": "0"}, "armoire": {"nb": "4"}}, "nomEntreprise": "ENTREPRISE 5", "adresse": "5 rue Albert Albert\n92700, Colombes"}, {"departement": "Hauts-de-Seine\n(92)", "dateMiseEnService": "19/11/2021", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 1, "contact": {"prenom": "Albert", "nom": "Albert2", "telephone": "01.00.00.00.00", "email": "albert@albert.com"}, "materiel": {"borneSimple": {"nb": "6 ", "type": "ALFEN EVE SINGLE PRO LINE"}, "borneDouble": {"nb": "4 ", "type": "ALFEN "}, "armoire": {"nb": "6"}}, "nomEntreprise": "ENTREPRISE 6", "adresse": "6 rue Albert Albert\n92700, Colombes"}, {"departement": "Alpes-Maritimes\n(06)", "dateMiseEnService": "05/01/2022", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 2, "contact": {"prenom": "Albert", "nom": "Albert4"}, "materiel": {"borneSimple": {"nb": "3 ", "type": "ALFEN EVE SINGLE PRO-LINE"}, "borneDouble": {"nb": "0"}, "armoire": {"nb": "8"}}, "nomEntreprise": "ENTREPRISE 7", "adresse": "7 rue Albert Albert\n92700, Colombes"}, {"departement": "Gironde \n(33)", "dateMiseEnService": "21/02/2022", "periodiciteEnMois": 12, "nbVisitesOrganisees": 2, "nbDemiJoursTravail": 3, "contact": {"prenom": "Albert", "nom": "Albert2", "telephone": "01.00.00.00.00", "email": "albert@albert.com"}, "materiel": {"borneSimple": {"nb": "7 ", "type": "ALFEN EVE SINGLE PRO LINE"}, "borneDouble": {"nb": "5 ", "type": "ALFEN "}, "armoire": {"nb": "10"}}, "nomEntreprise": "ENTREPRISE 8", "adresse": "8 rue Albert Albert\n92700, Colombes"}]}
+{
+    "dateDonnees": "14/06/2023",
+    "parcs": [
+        {
+            "departement": "Seine-Saint-Denis\n(93)",
+            "dateMiseEnService": "27/12/2021",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Jean-Christophe",
+                "nom": "Rousseau"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "4 ",
+                    "type": "Evlink Schneider param\u00e9trables"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique  "
+                }
+            },
+            "nomEntreprise": "SOCIETE GENERALE FACTORING ",
+            "adresse": "3 rue Francis Pressens\u00e9\n93210, Saint Denis"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "03/03/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Ursula",
+                "nom": "Mayer",
+                "telephone": "01.34.93.80.58",
+                "email": "ursula.majer@dewatou.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "4 ",
+                    "type": "ALFEN EVE SINGLE PRO LINE"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique  "
+                }
+            },
+            "nomEntreprise": "DE WATOU",
+            "adresse": "18 rue Saint Vincent \n78100, Saint-Germain-En Laye "
+        },
+        {
+            "departement": "Alpes-Maritimes\n(06)",
+            "dateMiseEnService": "01/07/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 4,
+            "contact": {
+                "prenom": "Christophe",
+                "nom": "Cornilleau",
+                "telephone": "07.64.32.89.76",
+                "email": "christophe.cornilleau@ciblex.fr"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "3 ",
+                    "type": "ALFEN EVE MINI MURALE"
+                },
+                "borneDouble": {
+                    "nb": "4 ",
+                    "type": "ALFEN EVE DOUBLE PRO LINE"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique "
+                }
+            },
+            "nomEntreprise": "CIBLEX",
+            "adresse": "Pal Saint Isidor Zone 7 \n06200, Nice"
+        },
+        {
+            "departement": "Gironde \n(33)",
+            "dateMiseEnService": "17/04/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Sylvain",
+                "nom": "Joyen",
+                "telephone": "04.69.41.04.11",
+                "email": "dmt@azureva-vacances.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "2 ",
+                    "type": "ALFEN EVE MINI MURALE"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique "
+                }
+            },
+            "nomEntreprise": "AZUREVA LACANAU",
+            "adresse": "All\u00e9e du vieux Port \n33680, Lacanau"
+        },
+        {
+            "departement": "Haut-De-Seine \n(92)",
+            "dateMiseEnService": "31/05/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Marc",
+                "nom": "Delsuc",
+                "telephone": "06.13.25.18.53",
+                "email": "instantane@wanadoo.fr"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1 ",
+                    "type": "ALFEN EVE SINGLE PRO-LINE"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "INSTANTANE",
+            "adresse": "20 rue de Saclay \n92290, Chatenay Malabry "
+        },
+        {
+            "departement": "Gironde \n(33)",
+            "dateMiseEnService": "05/07/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Fran\u00e7ois",
+                "nom": "Dubost",
+                "telephone": "05.57.98.02.22",
+                "email": "dubost@notaires.fr"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1 ",
+                    "type": "ALFEN EVE mural"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "CABINET DUBOST",
+            "adresse": "53 Cr Sadi Carnot\n33210, LANGON "
+        },
+        {
+            "departement": "Val d'Oise\n(95)",
+            "dateMiseEnService": null,
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Anthony",
+                "nom": "Braga",
+                "telephone": "06.73.99.44.03",
+                "email": "anthony.braga@ceg-aqualia.fr"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "1 ",
+                    "type": "ALFEN"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "CEG Aqualia ",
+            "adresse": "83 boulevard de G\u00e9n\u00e9ral de Gaulle\n95196, Goussainville "
+        },
+        {
+            "departement": "Val-De-Marne\n(94)",
+            "dateMiseEnService": "23/05/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Cl\u00e9ment",
+                "nom": "Coffinier",
+                "telephone": "06.47.88.94.62"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "2 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "M ENERGIES",
+            "adresse": "56 Rue Louis Auroux \n94120, Fontenay-Sous-Bois"
+        },
+        {
+            "departement": "Vosges\n(88) ",
+            "dateMiseEnService": "14/06/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Sylvain",
+                "nom": "Joyen",
+                "telephone": "04.69.41.04.11",
+                "email": "dmt@azureva-vacances.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "2 ",
+                    "type": "ALFEN EVE MINI sur pied"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique "
+                }
+            },
+            "nomEntreprise": "AZUREVA LES VOSGES",
+            "adresse": "2 rue du Larcenaire \n88540, Bussang"
+        },
+        {
+            "departement": "C\u00f4tes d'Or\n(21)",
+            "dateMiseEnService": "04/11/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Xavier",
+                "nom": "Mariotte",
+                "telephone": "xavier.mariotte@maroquineriethomas.com",
+                "email": "03.80.97.40.02"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "2 ",
+                    "type": "ALFEN "
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique "
+                }
+            },
+            "nomEntreprise": "MAROQUINERIE AUGUSTE THOMAS",
+            "adresse": "ZI. Rue de la Croix de Belin \n21140 Semur-en-Auxois"
+        },
+        {
+            "departement": "C\u00f4tes d'Or\n(21)",
+            "dateMiseEnService": "05/10/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Xavier",
+                "nom": "Mariotte",
+                "telephone": "xavier.mariotte@maroquineriethomas.com",
+                "email": "03.80.97.40.02"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1  ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "1  ",
+                    "type": "ALFEN"
+                },
+                "armoire": {
+                    "nb": "\n"
+                }
+            },
+            "nomEntreprise": "MAROQUINERIE DE SAULIEU",
+            "adresse": "ZI. 2 Chemin du Conclais\n21210 Saulieu"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "26/08/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Giulio",
+                "nom": "Di",
+                "telephone": "Gennaro",
+                "email": "giulio.digennaro@up-finance.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1  ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "PGAM DI GENNARO",
+            "adresse": "10 chemin des Alluets\n78240, Chambourcy"
+        },
+        {
+            "departement": "Seine-Saint-Denis\n(93)",
+            "dateMiseEnService": "02/09/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Giulio",
+                "nom": "Di",
+                "telephone": "Gennaro",
+                "email": "giulio.digennaro@up-finance.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1  ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "PGAM SOARES",
+            "adresse": "18 All\u00e9e du R\u00e9servoir\n93340, Le Raincy"
+        },
+        {
+            "departement": "Haut-De-Seine \n(92)",
+            "dateMiseEnService": "17/10/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Franck",
+                "nom": "Tregous",
+                "telephone": "Franck.tregous@arcontrols.fr",
+                "email": "06.50.96.09.91"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "1 ",
+                    "type": "ALFEN"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "ARCONTROLS",
+            "adresse": "3 rue Andr\u00e9 Charles Boule\nAntony, 92160"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "19/10/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Manon",
+                "nom": "Chabot",
+                "telephone": "manon.chabot@arquus-defense.com",
+                "email": "0665890345"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "1 ",
+                    "type": "ALFEN"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "ARQUUS GUYANCOURT",
+            "adresse": "5 rue Alfred Kastler\nGuyancourt, 78280"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "10/11/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Manon",
+                "nom": "Chabot",
+                "telephone": "manon.chabot@arquus-defense.com",
+                "email": "0665890345"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "1 ",
+                    "type": "ALFEN"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "ARQUUS VERSAILLES",
+            "adresse": "15 bis all\u00e9e des Maronniers \nVersailles, 78000"
+        },
+        {
+            "departement": null,
+            "dateMiseEnService": null,
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {},
+            "materiel": {
+                "borneSimple": {
+                    "nb": "2 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "AZUREVA ST CYPRIEN ",
+            "adresse": null
+        },
+        {
+            "departement": "Savoie (73)",
+            "dateMiseEnService": null,
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Sylvain",
+                "nom": "Joyen",
+                "telephone": "04.69.41.04.11",
+                "email": "dmt@azureva-vacances.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "2 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "AZUREVA KARELLIS",
+            "adresse": "Azureva Karellis\nLes Karellis\n73870, Montricher-Albanne"
+        },
+        {
+            "departement": "Val-de-Marne\n(94)",
+            "dateMiseEnService": null,
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 4,
+            "contact": {
+                "prenom": "L\u00e9o",
+                "nom": "Morillon",
+                "telephone": "leo.morillon@sefalproperty.com",
+                "email": "0649414877"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "20 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique"
+                }
+            },
+            "nomEntreprise": "SEFAL ATOME ",
+            "adresse": "5/11 Rue Charles de Gaulle, 94140 Alfortville"
+        },
+        {
+            "departement": "Paris (75)",
+            "dateMiseEnService": "13/03/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Luis-Filipe",
+                "nom": "Camilo",
+                "telephone": "lfcamilo@novaxia.fr"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "10 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique"
+                }
+            },
+            "nomEntreprise": "NOVAXIA",
+            "adresse": "45 rue Saint Charles\n75015 Paris"
+        },
+        {
+            "departement": "H\u00e9rault (34)",
+            "dateMiseEnService": "08/12/2022",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 2,
+            "contact": {
+                "prenom": "Francois",
+                "nom": "Stephan",
+                "telephone": "francois.stephan@epf.fr",
+                "email": "0630791095"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "5"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "EPF MONTPELLIER ",
+            "adresse": "21 Boulevard Berthelot,\n 34000 Montpellier"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "23/02/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": null,
+            "contact": {
+                "prenom": "Alain",
+                "nom": "Lesprit",
+                "telephone": "alain.lesprit@sqy.fr",
+                "email": "0632920084"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "5"
+                },
+                "armoire": {
+                    "nb": "2 armoires \u00e9lectriques "
+                }
+            },
+            "nomEntreprise": "CENTRE TECHNIQUE COMMUNAUTAIRE SQY",
+            "adresse": "4 rue des Charmes 78190 Trappes"
+        },
+        {
+            "departement": "Charente-Maritime (17)",
+            "dateMiseEnService": "14/03/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Sylvain",
+                "nom": "Joyen",
+                "telephone": "04.69.41.04.11",
+                "email": "dmt@azureva-vacances.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "3 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "AZUREVA RONCE LES BAINS",
+            "adresse": "17 Av. des \u00c9rables, 17390 La Tremblade"
+        },
+        {
+            "departement": "Landes (40)",
+            "dateMiseEnService": "10/03/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Sylvain",
+                "nom": "Joyen",
+                "telephone": "04.69.41.04.11",
+                "email": "dmt@azureva-vacances.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "2 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "AZUREVA HOSSEGOR",
+            "adresse": "72 Av. de Vamireh,  40151 Soorts-Hossegor"
+        },
+        {
+            "departement": "Pyr\u00e9n\u00e9es-Atlantiques (64)",
+            "dateMiseEnService": "08/03/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": 1,
+            "contact": {
+                "prenom": "Sylvain",
+                "nom": "Joyen",
+                "telephone": "04.69.41.04.11",
+                "email": "dmt@azureva-vacances.com"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "3 ",
+                    "type": "ALFEN"
+                },
+                "borneDouble": {
+                    "nb": "None"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "AZUREVA HENDAYE",
+            "adresse": "175 Bd de l'Empereur, 64700 Hendaye"
+        },
+        {
+            "departement": "Bouches-\ndu-Rh\u00f4ne\n (13)",
+            "dateMiseEnService": "24/03/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": null,
+            "contact": {
+                "prenom": "Francois",
+                "nom": "ROUX",
+                "telephone": ":",
+                "email": "Francois.ROUX@ciblex.fr"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "5"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique "
+                }
+            },
+            "nomEntreprise": "CIBLEX Vitrolles",
+            "adresse": "6 rue de Vienne,\n 13127 Vitrolles"
+        },
+        {
+            "departement": "Yvelines\n(78)",
+            "dateMiseEnService": "07/02/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": null,
+            "contact": {
+                "prenom": "Noureddine",
+                "nom": "Boumeddane",
+                "telephone": "noureddine.boumeddane@catinvest.fr",
+                "email": "0614222176"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "1"
+                },
+                "borneDouble": {
+                    "nb": "5"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique"
+                }
+            },
+            "nomEntreprise": "=+E31+A30:O31+A30:U36",
+            "adresse": "1 avenue du Pr\u00e9sident J F Kennedy 78340 Les Clayes sous Bois"
+        },
+        {
+            "departement": "Val-de-Marne\n(94)",
+            "dateMiseEnService": null,
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": null,
+            "contact": {
+                "prenom": "Julien",
+                "nom": "Degryse",
+                "telephone": "j.degryse@epi94.fr",
+                "email": "0683128436"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "2"
+                },
+                "armoire": {
+                    "nb": "1 armoire \u00e9lectrique"
+                }
+            },
+            "nomEntreprise": "EPI",
+            "adresse": "15 rue des Hauts Guibouts\n 94360 Bry sur Marne"
+        },
+        {
+            "departement": "Bouches-\ndu-Rh\u00f4ne\n (13)",
+            "dateMiseEnService": "03/03/2023",
+            "periodiciteEnMois": 12,
+            "nbVisitesOrganisees": 2,
+            "nbDemiJoursTravail": null,
+            "contact": {
+                "prenom": "CEREL"
+            },
+            "materiel": {
+                "borneSimple": {
+                    "nb": "None"
+                },
+                "borneDouble": {
+                    "nb": "7"
+                },
+                "armoire": {
+                    "nb": "None"
+                }
+            },
+            "nomEntreprise": "Saint M\u00eetre",
+            "adresse": "Avenue des Peupliers\n13920 Saint M\u00eetre les remparts"
+        }
+    ]
+}
