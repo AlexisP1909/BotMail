@@ -86,7 +86,7 @@ def ExcelToPython(Variables):
                     numC_Periodicite = i
                 elif df.iloc[NuméroLigneEnTetes,i].lower()==NomC_VisiteOrganisee.lower() :
                     numC_VisiteOrganisee.append(str(i))#stocke chaque numéro de colonne relevé
-
+    print("DateMiseEnService et periodicité:",numC_DateMiseEnService, numC_Periodicite)
     #Création des listes et dictionnaires globaux
     EnvoiJSON = {}
     date = str(datetime.datetime.today().strftime("%d/%m/%Y"))#date d'aujourd'hui convertie en string
@@ -101,16 +101,16 @@ def ExcelToPython(Variables):
         Entreprise = df.iloc[i,numC_Entreprise]
         try :
             BornesSimpl = re.split("[()]",df.iloc[i,numC_BornesSimpl])
-        except AttributeError as e:
-            BornesSimpl = None
+        except TypeError as e:
+            BornesSimpl = "0"
         try :    
             BornesDoubles = re.split("[()]",df.iloc[i,numC_BornesDoubles])
-        except AttributeError as e:
-            BornesDoubles = None
+        except TypeError as e:
+            BornesDoubles = "0"
         try :
-            Armoires = re.split("[()]",df.iloc[i,numC_Armoires])
-        except AttributeError as e :
-            Armoires = None
+            Armoires = re.split(" ",df.iloc[i,numC_Armoires])
+        except TypeError as e :
+            Armoires = "0"
         
 
 
@@ -124,9 +124,10 @@ def ExcelToPython(Variables):
             Contact=[]
         DateMiseEnService = df.iloc[i,numC_DateMiseEnService]
         Periodicite = df.iloc[i,numC_Periodicite]
-
         for j in range(0,len(numC_VisiteOrganisee)-1):
-            NbVisitesOrganisees +=1#le nombre de visites organisées depuis la mise en service = le nombre de périodes passées
+            if df.iloc[i,int(numC_VisiteOrganisee[j])] is not None:
+                if df.iloc[i,int(numC_VisiteOrganisee[j])].lower()=="ok":
+                    NbVisitesOrganisees +=1#le nombre de visites organisées depuis la mise en service = le nombre de périodes passées
 
 
         #Création des sous-sous-dictionnaires
