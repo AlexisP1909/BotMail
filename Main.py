@@ -27,7 +27,8 @@ VariablesEnvoiMail["destinateur"] = 'alexis.pouillieute@gmail.com'
 VariablesEnvoiMail["password"] = 'eramkhznecqpnuob'
 VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr','nicolas.gorgette@epfedu.fr']
 
+
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
-    VariablesEnvoiMail["html_content"] = create_html_content(VariablesExcelToPython["nom_fichierj"])
+    VariablesEnvoiMail["html_content"], VariablesEnvoiMail["date"] = create_html_content(VariablesExcelToPython["nom_fichierj"])
     EnvoiMail(VariablesEnvoiMail)

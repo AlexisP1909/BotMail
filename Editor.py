@@ -201,10 +201,10 @@ def create_html_content(jsonFileName):
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
     print(type(html_content))
-    return html_content
+    return html_content, dateDonnees.strftime('%d %m %Y')
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
 
 if __name__ == "__main__": # Code principal lancé lorsque Editor.py est exécuté seul
-    html_content = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
+    html_content, date = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
     print(html_content)
