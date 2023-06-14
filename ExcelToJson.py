@@ -3,6 +3,7 @@ from openpyxl import load_workbook
 import datetime
 import json
 import os
+import re
 def ExcelToPython(Variables):   
     #Variables 
     Nom_Feuille = Variables["Nom_Feuille"]
@@ -99,9 +100,9 @@ def ExcelToPython(Variables):
         #Variables pour la lisibilité et traitement
         Entreprise = df.iloc[i,numC_Entreprise]
 
-        BornesSimpl = str(df.iloc[i,numC_BornesSimpl]).split(" ",1)
-        BornesDoubles = str(df.iloc[i,numC_BornesDoubles]).split(" ",1)
-        Armoires = str(df.iloc[i,numC_Armoires]).split(" ",1)
+        BornesSimpl = re.split("[()]",str(df.iloc[i,numC_BornesSimpl]))
+        BornesDoubles = re.split("[()]",str(df.iloc[i,numC_BornesDoubles]))
+        Armoires = re.split("[()]",str(df.iloc[i,numC_Armoires]))
 
         NbDemiJournees = df.iloc[i,numC_NbDemiJournes]
 
