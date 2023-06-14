@@ -22,6 +22,8 @@ def ExcelToPython(Variables):
     nom_fichier = Variables["nom_fichier"]
     nom_fichierj = Variables["nom_fichierj"]
 
+    #
+    Contact=[]
     # Obtenez le répertoire de travail actuel
     repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
     # Créez le chemin absolu en combinant le répertoire de travail et le nom du fichier
@@ -156,7 +158,10 @@ def ExcelToPython(Variables):
             #Dictionnaire Parc
             DictionnaireParc = {}
             DictionnaireParc["departement"] = Departement
-            DictionnaireParc["dateMiseEnService"] = str(DateMiseEnService.strftime("%d/%m/%Y"))
+            try :
+                DictionnaireParc["dateMiseEnService"] = str(DateMiseEnService.strftime("%d/%m/%Y"))
+            except AttributeError as e:
+                DictionnaireParc["dateMiseEnService"] = None
             DictionnaireParc["periodiciteEnMois"] = Periodicite
             DictionnaireParc["nbVisitesOrganisees"] = NbVisitesOrganisees
             DictionnaireParc["nbDemiJoursTravail"] = NbDemiJournees
