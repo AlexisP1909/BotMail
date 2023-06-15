@@ -8,7 +8,6 @@ KeyName_parcs = "parcs"
 KeyName_departement = "departement"
 KeyName_dateMiseEnService = "dateMiseEnService"
 KeyName_periodiciteEnMois = "periodiciteEnMois"
-KeyName_periodiciteEnMois = "periodiciteEnMois"
 KeyName_nbVisitesOrganisees = "nbVisitesOrganisees"
 KeyName_nbDemiJoursTravail = "nbDemiJoursTravail"
 KeyName_prenom = "prenom"
@@ -26,9 +25,9 @@ KeyName_adresse = "adresse"
 
 periodeEntretienEnMois = 3 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
-typeMateriel = {"borneSimple":"borne simple", 
-                "borneDouble": "borne double",
-                "armoire": "armoire"} # Noms des matériels selon leurs clés  
+typeMateriel = {KeyName_borneSimple:"borne simple", 
+                KeyName_borneDouble: "borne double",
+                KeyName_armoire: "armoire"} # Noms des matériels selon leurs clés  
 
 repertoire_actuel = os.path.dirname(os.path.abspath(__file__)) # Répertoire de travail actuel
 
@@ -92,21 +91,21 @@ def parseInputData(data):
     SORTIE: parcs (list) Liste de parcs, à laquelle on a ajouté les valeurs "urgence":"unStringSPECIFIQUE" et "dateEntretien":"unString" pour chaque parc
             dateDonneesFormate (datetime) Date de l'envoi des données (extraite de data reçu en entrée)
     """
-    dateDonnees = data["dateDonnees"]
+    dateDonnees = data[KeyName_DateDonnees]
     dateDonneesFormate = strToDate(dateDonnees) # On convertit la date de "str" vers le type "date"
-    parcs = data["parcs"] #Liste de dictonnaires, chaque dictionnaire est un parc
+    parcs = data[KeyName_parcs] #Liste de dictonnaires, chaque dictionnaire est un parc
     for parc in parcs[:]: # Pour chaque parc (dans une liste copie)
 
-        try: strToDate(parc["dateMiseEnService"]) # On s'assure que la dateMiseEnService existe
+        try: strToDate(parc[KeyName_dateMiseEnService]) # On s'assure que la dateMiseEnService existe
         except TypeError: #Si elle n'exsiste pas, on le signale et on passe au parc suivant
             global errorInInputData
             errorInInputData = True
-            print(f"Le parc de {parc['nomEntreprise']} n'a pas de date de mise en service")
+            print(f"Le parc de {parc[KeyName_nomEntreprise]} n'a pas de date de mise en service")
             parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
             continue
 
         # La formule de la date de l'entretien prévu est : dateEntretien = dateMiseEnService + periodiciteEnMois*nbVisitesOrganisees
-        date_entretien_organise = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(parc["nbVisitesOrganisees"]))
+        date_entretien_organise = strToDate(parc[KeyName_dateMiseEnService])+ relativedelta(months=parc[Name_periodiciteEnMois]*(parc[KeyName_nbVisitesOrganisees]))
     
         if(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien_organise and date_entretien_organise>=dateDonneesFormate):#Si la date de l'entretien organisé est entre aujourd'hui et dans periodeEntretienEnMois mois
             parc["urgence"] = Urgence.organise.value # La visite dans les periodeEntretienEnMois mois est organisée, elle est donc pas du tout urgente à prévoir
@@ -114,7 +113,7 @@ def parseInputData(data):
         else:# La visite dans les trois mois n'est pas organisée             
             # La formule de la date du prochain l'entretien est : dateEntretien = dateMiseEnService + periodiciteEnMois* (nbVisitesOrganisees+1)
             
-            date_entretien = strToDate(parc["dateMiseEnService"])+ relativedelta(months=parc["periodiciteEnMois"]*(1+parc["nbVisitesOrganisees"])) # On détermine la date de l'intervention à venir
+            date_entretien = strToDate(parc[KeyName_dateMiseEnService])+ relativedelta(months=parc[KeyName_periodiciteEnMois]*(1+parc[KeyName_nbVisitesOrganisees])) # On détermine la date de l'intervention à venir
             parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
                 parc["urgence"]=Urgence.dramatique.value #L'entretien est en retard
@@ -123,7 +122,7 @@ def parseInputData(data):
             elif(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien): #Si la date de l'entretien est dans periodeEntretienEnMois mois (ou moins, mais pas sous 1 mois ou retard)
                 parc["urgence"]=Urgence.pasUrgent.value # L'entretien est considéré comme pas urgent
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
-                print(f"Le parc de {parc['nomEntreprise']} (mis en service le {parc['dateMiseEnService']}) n'a pas d'entretiens dans les {periodeEntretienEnMois} mois")
+                print(f"Le parc de {parc[KeyName_nomEntreprise]} (mis en service le {parc[KeyName_dateMiseEnService]}) n'a pas d'entretiens dans les {periodeEntretienEnMois} mois")
                 parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
             
     return parcs, dateDonneesFormate    
@@ -136,7 +135,7 @@ def trierParcs(donneesParcs):
     """
     dictParcs = {}
     for parc in donneesParcs: # Tri des parcs par région
-        regionDuParc = findRegion(str(parc["departement"])) # On récupère la région du parc
+        regionDuParc = findRegion(str(parc[KeyName_departement])) # On récupère la région du parc
         if regionDuParc in dictParcs.keys():# Si la région est déjà présente dans le dictionnaire des parcs
             dictParcs.get(regionDuParc).append(parc) # On ajoute le parc à sa région dans le dictionnaire
         else: # La région n'est pas encore présente dans le dictionnaire des parcs
@@ -149,7 +148,7 @@ def trierParcs(donneesParcs):
     i = 0 # Indice correspondant au parc
     for nomRegion, parcs in dictParcs.items():# Tri des régions selon celle qui a le plus de demi-journées de travail
         total = 0 #Nb demi-journées de travail
-        for parc in parcs: total+=int(parc["nbDemiJoursTravail"])
+        for parc in parcs: total+=int(parc[KeyName_nbDemiJoursTravail])
         listeTotaux.append((i, total))
         i+=1
     #print("Liste du nouvel ordre", listeTotaux) # Le premier nombres est l'indice de la i-ème région, le deuxième chiffre est le total de ses demi-journées de travail
