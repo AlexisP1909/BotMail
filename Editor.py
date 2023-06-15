@@ -146,7 +146,7 @@ def createMaterielHTML(materiels):
     for materiel, details in materiels.items():
         if details['nb']=="0" or details['nb']=="None": continue
         nomMateriel = typeMateriel[materiel].replace('e','es') if int(details['nb'])>1 else typeMateriel[materiel]
-        typeMatos = f"({details['type']})" if 'type' in details else ""
+        typeMatos = f"{details['type']}" if 'type' in details else ""
         html.append(f"{details['nb']} {nomMateriel} {typeMatos}")    
     return "<br>".join(html)
 

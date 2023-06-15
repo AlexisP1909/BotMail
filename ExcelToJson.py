@@ -2,6 +2,18 @@ import pandas as pd
 from openpyxl import load_workbook
 import datetime,json, os, re
 
+def extraire_premier_nombre_et_reste(chaine):
+    pattern = r'(\d+)(.*)'  # Expression régulière pour capturer le premier nombre et le reste de la chaîne
+    match = re.match(pattern, chaine)
+    if match:
+        nombre = match.group(1)  # Récupère le premier nombre trouvé
+        reste = match.group(2)  # Récupère le reste de la chaîne
+        try :
+            return int(nombre), reste
+        except TypeError as e:
+            return int(nombre),None
+    else:
+        return None, None  # Retourne None si aucun nombre n'est trouvé
 def ExcelToPython(Variables):   
     #Variables 
     Nom_Feuille = Variables["Nom_Feuille"]
@@ -86,7 +98,6 @@ def ExcelToPython(Variables):
                     numC_Periodicite = i
                 elif df.iloc[NuméroLigneEnTetes,i].lower()==NomC_VisiteOrganisee.lower() :
                     numC_VisiteOrganisee.append(str(i))#stocke chaque numéro de colonne relevé
-    print("DateMiseEnService et periodicité:",numC_DateMiseEnService, numC_Periodicite)
     #Création des listes et dictionnaires globaux
     EnvoiJSON = {}
     date = str(datetime.datetime.today().strftime("%d/%m/%Y"))#date d'aujourd'hui convertie en string
@@ -99,16 +110,13 @@ def ExcelToPython(Variables):
 
         #Variables pour la lisibilité et traitement
         Entreprise = df.iloc[i,numC_Entreprise]
-        try :
-            BornesSimpl = re.split("[()]",df.iloc[i,numC_BornesSimpl])
-        except TypeError as e:
-            BornesSimpl = "0"
+        BornesSimpl = extraire_premier_nombre_et_reste(str(df.iloc[i,numC_BornesSimpl]))
         try :    
-            BornesDoubles = re.split("[()]",df.iloc[i,numC_BornesDoubles])
+            BornesDoubles = extraire_premier_nombre_et_reste(df.iloc[i,numC_BornesDoubles])
         except TypeError as e:
             BornesDoubles = "0"
         try :
-            Armoires = re.split(" ",df.iloc[i,numC_Armoires])
+            Armoires = extraire_premier_nombre_et_reste(df.iloc[i,numC_Armoires])
         except TypeError as e :
             Armoires = "0"
         
@@ -176,12 +184,11 @@ def ExcelToPython(Variables):
             DictionnaireParc["nbDemiJoursTravail"] = NbDemiJournees
             DictionnaireParc["contact"] = DictionnaireContact
             DictionnaireParc["materiel"] = DictionnaireMateriel
-            DictionnaireParc["nomEntreprise"] = Entreprise
+            DictionnaireParc["nomEntreprise"] = str(Entreprise)
             DictionnaireParc["adresse"] = Adresse
             ListesParcs.append(DictionnaireParc)#On ajoute le dictionnaire du parc en cours à la liste des parcs
 
     EnvoiJSON["parcs"] = ListesParcs #On ajoute les parcs au Json 
-
     # Créez le chemin relatif en combinant le répertoire de travail et le nom du fichier
     chemin_fichier = os.path.join(repertoire_actuel, nom_fichierj)
     out_file = open(chemin_fichier, "w")
