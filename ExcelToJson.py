@@ -13,7 +13,8 @@ def extraire_premier_nombre_et_reste(chaine):
         except TypeError as e:
             return int(nombre),None
     else:
-        return None, None  # Retourne None si aucun nombre n'est trouvé
+        return "0", None  # Retourne None si aucun nombre n'est trouvé
+    
 def ExcelToPython(Variables):   
     #Variables 
     Nom_Feuille = Variables["Nom_Feuille"]
@@ -111,14 +112,8 @@ def ExcelToPython(Variables):
         #Variables pour la lisibilité et traitement
         Entreprise = df.iloc[i,numC_Entreprise]
         BornesSimpl = extraire_premier_nombre_et_reste(str(df.iloc[i,numC_BornesSimpl]))
-        try :    
-            BornesDoubles = extraire_premier_nombre_et_reste(df.iloc[i,numC_BornesDoubles])
-        except TypeError as e:
-            BornesDoubles = "0"
-        try :
-            Armoires = extraire_premier_nombre_et_reste(df.iloc[i,numC_Armoires])
-        except TypeError as e :
-            Armoires = "0"
+        BornesDoubles = extraire_premier_nombre_et_reste(str(df.iloc[i,numC_BornesDoubles]))
+        Armoires = extraire_premier_nombre_et_reste(str(df.iloc[i,numC_Armoires]))
         
 
 

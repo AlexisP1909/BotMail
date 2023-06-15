@@ -3,6 +3,27 @@ from datetime import datetime
 from enum import Enum
 from dateutil.relativedelta import relativedelta
 
+KeyName_DateDonnees = "dateDonnees"
+KeyName_parcs = "parcs"
+KeyName_departement = "departement"
+KeyName_dateMiseEnService = "dateMiseEnService"
+KeyName_periodiciteEnMois = "periodiciteEnMois"
+KeyName_periodiciteEnMois = "periodiciteEnMois"
+KeyName_nbVisitesOrganisees = "nbVisitesOrganisees"
+KeyName_nbDemiJoursTravail = "nbDemiJoursTravail"
+KeyName_prenom = "prenom"
+KeyName_nom = "nom"
+KeyName_telephone = "telephone"
+KeyName_email = "email"
+KeyName_materiel = "materiel"
+KeyName_borneSimple = "borneSimple"
+KeyName_type = "type"
+KeyName_borneDouble = "borneDouble"
+KeyName_armoire = "armoire"
+KeyName_nomEntreprise = "nomEntreprise"
+KeyName_adresse = "adresse"
+
+
 periodeEntretienEnMois = 3 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
 typeMateriel = {"borneSimple":"borne simple", 

@@ -31,4 +31,4 @@ VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
     VariablesEnvoiMail["html_content"], VariablesEnvoiMail["date"] = create_html_content(VariablesExcelToPython["nom_fichierj"])
-    EnvoiMail(VariablesEnvoiMail)
+    #EnvoiMail(VariablesEnvoiMail)
