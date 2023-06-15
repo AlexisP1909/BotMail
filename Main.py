@@ -20,6 +20,8 @@ VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
 VariablesExcelToPython["nom_fichier"] = "Planning d'intervention Maintenance POUR TESTS.xlsx"
 VariablesExcelToPython["nom_fichierj"] = "data.json"
 
+PeriodeEntretienenMois= 3
+
 VariablesEnvoiMail = {}
 VariablesEnvoiMail["smtp_server"] = 'smtp.gmail.com'
 VariablesEnvoiMail["port"] = 465
@@ -30,5 +32,5 @@ VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
 
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
-    VariablesEnvoiMail["html_content"], VariablesEnvoiMail["date"] = create_html_content(VariablesExcelToPython["nom_fichierj"])
-    #EnvoiMail(VariablesEnvoiMail)
+    VariablesEnvoiMail["html_content"], VariablesEnvoiMail["date"] = create_html_content(VariablesExcelToPython["nom_fichierj"],PeriodeEntretienenMois)
+    EnvoiMail(VariablesEnvoiMail)

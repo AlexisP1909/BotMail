@@ -22,8 +22,8 @@ KeyName_armoire = "armoire"
 KeyName_nomEntreprise = "nomEntreprise"
 KeyName_adresse = "adresse"
 
+periodeEntretienEnMois = -1 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
-periodeEntretienEnMois = 3 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
 typeMateriel = {KeyName_borneSimple:"borne simple", 
                 KeyName_borneDouble: "borne double",
@@ -211,12 +211,14 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     if errorInInputData:html_final = html_final.replace("<!-- INSERER COMMENTAIRE -->", "Un problème a été rencontré dans la base de données: Verifiez la justesse des informations")
     return html_final
 
-def create_html_content(jsonFileName):
+def create_html_content(jsonFileName,PeriodeEntretienenMois):
     """
     Fonction qui pour un nom de fichier JSON donné (qui doit être dans le même dossier que Editor.py) revoie l'HTML du mail correspondant
     ENTREE: jsonFileName (str) Le nom du fichier JSON contenant l'information (au format "nomDeFichier.json")
     SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère 
     """
+    global periodeEntretienEnMois
+    periodeEntretienEnMois = PeriodeEntretienenMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
     dictParcsTrie = trierParcs(listeParcs)
