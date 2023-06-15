@@ -105,7 +105,7 @@ def parseInputData(data):
             continue
 
         # La formule de la date de l'entretien prévu est : dateEntretien = dateMiseEnService + periodiciteEnMois*nbVisitesOrganisees
-        date_entretien_organise = strToDate(parc[KeyName_dateMiseEnService])+ relativedelta(months=parc[Name_periodiciteEnMois]*(parc[KeyName_nbVisitesOrganisees]))
+        date_entretien_organise = strToDate(parc[KeyName_dateMiseEnService])+ relativedelta(months=parc[KeyName_periodiciteEnMois]*(parc[KeyName_nbVisitesOrganisees]))
     
         if(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien_organise and date_entretien_organise>=dateDonneesFormate):#Si la date de l'entretien organisé est entre aujourd'hui et dans periodeEntretienEnMois mois
             parc["urgence"] = Urgence.organise.value # La visite dans les periodeEntretienEnMois mois est organisée, elle est donc pas du tout urgente à prévoir
