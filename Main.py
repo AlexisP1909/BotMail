@@ -17,7 +17,7 @@ VariablesExcelToPython["NomC_Contact"] = "Contact"
 VariablesExcelToPython["NomC_DateMiseEnService"] = "Date de mise en service"
 VariablesExcelToPython["NomC_Periodicite"] = "Periodicité en mois"
 VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
-VariablesExcelToPython["nom_fichier"] = "Planning d'intervention Maintenance POUR TESTS.xlsx"
+VariablesExcelToPython["nom_fichier"] = "Planning d'intervention Maintenance CENSURE POUR TESTS.xlsx"
 VariablesExcelToPython["nom_fichierj"] = "data.json"
 
 PeriodeEntretienenMois= 3
