@@ -25,6 +25,12 @@ KeyName_adresse = "adresse"
 
 periodeEntretienEnMois = 3 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
+delaiAvNotifRetardEnJours = 7 # Nombre de jours après l'apparition d'un retard auquel on prévient le superviseur en plus de l'interlocuteur habituel
+
+envoiSuperviseur = False # Variable indiquant s'il faut prévenir le superviseur
+
+entretienEnRetard = False
+
 typeMateriel = {KeyName_borneSimple:"borne simple", 
                 KeyName_borneDouble: "borne double",
                 KeyName_armoire: "armoire"} # Noms des matériels selon leurs clés  
@@ -117,6 +123,9 @@ def parseInputData(data):
             parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
                 parc["urgence"]=Urgence.dramatique.value #L'entretien est en retard
+                global envoiSuperviseur, entretienEnRetard
+                entretienEnRetard = True
+                envoiSuperviseur =(dateDonneesFormate>=date_entretien+relativedelta(days=delaiAvNotifRetardEnJours)) # On prévient le superviseur si le délai d'attente de notification est passé depuis le retard
             elif(dateDonneesFormate+relativedelta(months=1)>=date_entretien): #Si la date de l'entretien est dans un mois (ou moins, mais pas en retard)
                 parc["urgence"]=Urgence.urgent.value # L'entretien est considéré comme urgent
             elif(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien): #Si la date de l'entretien est dans periodeEntretienEnMois mois (ou moins, mais pas sous 1 mois ou retard)
@@ -215,17 +224,21 @@ def create_html_content(jsonFileName):
     """
     Fonction qui pour un nom de fichier JSON donné (qui doit être dans le même dossier que Editor.py) revoie l'HTML du mail correspondant
     ENTREE: jsonFileName (str) Le nom du fichier JSON contenant l'information (au format "nomDeFichier.json")
-    SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère 
+    SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère
+            dateDonnees (datetime) La date des données (aka la date du jour lors de la création du Json)
+            entretienEnRetard (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard
+            envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
     """
+    global entretienEnRetard, envoiSuperviseur
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
     print(html_content)
-    return html_content, dateDonnees
+    return html_content, dateDonnees, entretienEnRetard, envoiSuperviseur
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
 
 if __name__ == "__main__": # Code principal lancé lorsque Editor.py est exécuté seul
-    html_content, date = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
+    html_content, date, retard, prevenirSup = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
     print(html_content)
