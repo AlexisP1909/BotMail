@@ -34,4 +34,4 @@ def EnvoiMail(Variables):
     print("ENVOYE")
     server.quit()
     fichier = open(chemin_fichier,'w')
-    fichier.write(date) 
+    fichier.write(date.strftime('%d/%m/%Y')) 

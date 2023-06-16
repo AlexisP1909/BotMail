@@ -88,7 +88,7 @@ def readJSON(JSONFile):
 
 def CompareLogToDate(Logdate, date):
     global envoyerMail
-    envoyerMail = diff_date(Logdate,date) >= relativedelta(months=1)
+    if Logdate+relativedelta(months=1) <= date: envoyerMail = True
 
 def findRegion(departement):
     """
@@ -240,7 +240,7 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     if errorInInputData:html_final = html_final.replace("<!-- INSERER COMMENTAIRE -->", "Un problème a été rencontré dans la base de données: Verifiez la justesse des informations")
     return html_final
 
-def create_html_content(jsonFileName,PeriodeEntretienenMois):
+def create_html_content(jsonFileName,PeriodeEntretienEnMois):
     """
     Fonction qui pour un nom de fichier JSON donné (qui doit être dans le même dossier que Editor.py) revoie l'HTML du mail correspondant
     ENTREE: jsonFileName (str) Le nom du fichier JSON contenant l'information (au format "nomDeFichier.json")
@@ -250,13 +250,13 @@ def create_html_content(jsonFileName,PeriodeEntretienenMois):
             envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
     """
     global envoyerMail, envoiSuperviseur,periodeEntretienEnMois
-    periodeEntretienEnMois = PeriodeEntretienenMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable    
+    periodeEntretienEnMois = PeriodeEntretienEnMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable    
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)
     CompareLogToDate(strToDate(readLog("Envoi_logs.txt")),dateDonnees) # On lit le log et on détermine si il est temps d'envoyer un mail
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
-    print(html_content)
+    print(html_content) # envoyerMail
     return html_content, dateDonnees, envoyerMail, envoiSuperviseur
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
