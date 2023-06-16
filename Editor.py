@@ -233,8 +233,7 @@ def create_html_content(jsonFileName,PeriodeEntretienenMois):
             envoyerMail (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard
             envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
     """
-    global envoyerMail, envoiSuperviseur
-    global periodeEntretienEnMois
+    global envoyerMail, envoiSuperviseur, periodeEntretienEnMois
     periodeEntretienEnMois = PeriodeEntretienenMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
