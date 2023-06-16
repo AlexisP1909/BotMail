@@ -23,7 +23,7 @@ KeyName_nomEntreprise = "nomEntreprise"
 KeyName_adresse = "adresse"
 
 periodeEntretienEnMois = -1 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
-
+dateLogs = -1
 
 delaiAvNotifRetardEnJours = 7 # Nombre de jours après l'apparition d'un retard auquel on prévient le superviseur en plus de l'interlocuteur habituel
 
@@ -59,6 +59,25 @@ def refRegion(pathDepartementRegions):
     with open(pathDepartementRegions, "r", encoding="utf8") as file:
         dictRegions = ast.literal_eval(file.read())
 
+def readLog(LogFile):
+    """
+    Fonction qui prend en entrée le nom d'un fichier texte contenu dans le même dossier que ce script et qui en sortie renvoie son contenu
+    ENTREE: LogFile (str) nom du fichier texte
+    SORTIE: content (str) contenu du fichier texte
+    """
+    repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
+    # Créez le chemin absolu en combinant le répertoire de travail et le nom du fichier
+    chemin_fichier = os.path.join(repertoire_actuel, LogFile)
+    try:
+      fichier = open(chemin_fichier,'r')
+      content = fichier.read()  
+      fichier.close()
+      return content
+    except FileNotFoundError as e :
+        print("FICHIER NON TROUVE")
+        return None
+
+
 def readJSON(JSONFile):
     """
     Fonction qui prend en entrée le path d'un fichier JSON et qui en sortie renvoie les informations qu'il contient
@@ -72,6 +91,10 @@ def readJSON(JSONFile):
         
     except:
         print("ERREUR LORS DE LA LECTURE DU FICHIER JSON")
+
+def CompareLogToDate(Logdate, date):
+    if diff_date(Logdate,date) >= relativedelta(months=1):
+        envoyerMail=True
 
 def findRegion(departement):
     """
@@ -137,7 +160,8 @@ def parseInputData(data):
             else: # L'entretien est dans plus de periodeEntretienEnMois mois
                 print(f"Le parc de {parc[KeyName_nomEntreprise]} (mis en service le {parc[KeyName_dateMiseEnService]}) n'a pas d'entretiens dans les {periodeEntretienEnMois} mois")
                 parcs.remove(parc) # On ne considère pas l'entretien pour le rappel
-            
+
+    CompareLogToDate(strToDate(readLog("Envoi_logs.txt")),dateDonneesFormate)
     return parcs, dateDonneesFormate    
 
 def trierParcs(donneesParcs):
@@ -233,15 +257,14 @@ def create_html_content(jsonFileName,PeriodeEntretienenMois):
             envoyerMail (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard
             envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
     """
-    global envoyerMail, envoiSuperviseur
-    global periodeEntretienEnMois
-    periodeEntretienEnMois = PeriodeEntretienenMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
+    global envoyerMail, envoiSuperviseur,periodeEntretienEnMois,dateLogs
+    periodeEntretienEnMois = PeriodeEntretienenMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable    
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
     print(html_content)
-    return html_content, dateDonnees, envoyerMail, envoiSuperviseur
+    return html_content, dateDonnees, dateLogs, envoyerMail, envoiSuperviseur
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
 
