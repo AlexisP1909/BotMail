@@ -29,8 +29,8 @@ VariablesEnvoiMail["destinateur"] = 'alexis.pouillieute@gmail.com'
 VariablesEnvoiMail["password"] = 'eramkhznecqpnuob'
 VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
 
-
 if __name__=="__main__":
     ExcelToPython(VariablesExcelToPython)
-    VariablesEnvoiMail["html_content"], VariablesEnvoiMail["date"] = create_html_content(VariablesExcelToPython["nom_fichierj"],PeriodeEntretienenMois)
-    EnvoiMail(VariablesEnvoiMail)
+    VariablesEnvoiMail["html_content"], VariablesEnvoiMail["date"], envoyerMail, envoiSuperviseur = create_html_content(VariablesExcelToPython["nom_fichierj"],PeriodeEntretienenMois)
+    if envoiSuperviseur: VariablesEnvoiMail["destinataire"].append('email.boss@swishforgood.com') # S'il faut prévenir le superviseur, on ajoute son mail aux destinataires
+    if envoyerMail: EnvoiMail(VariablesEnvoiMail) # On envoie le mail si le script "Editor.py" (avec la fonction create_html_content()) l'a jugé nécessaire

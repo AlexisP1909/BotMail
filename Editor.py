@@ -246,5 +246,5 @@ def create_html_content(jsonFileName,PeriodeEntretienenMois):
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
 
 if __name__ == "__main__": # Code principal lancé lorsque Editor.py est exécuté seul
-    html_content, date, retard, prevenirSup = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
+    html_content, date, envoiMail, prevenirSup = create_html_content(os.path.join(repertoire_actuel, "data.json")) # Création de l'HTML pour les données contenues dans le fichier JSON
     print(html_content)
