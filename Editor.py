@@ -24,16 +24,11 @@ KeyName_adresse = "adresse"
 
 periodeEntretienEnMois = -1 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
-
 delaiAvNotifRetardEnJours = 7 # Nombre de jours après l'apparition d'un retard auquel on prévient le superviseur en plus de l'interlocuteur habituel
 
 envoiSuperviseur = False # Variable indiquant s'il faut prévenir le superviseur
 
 envoyerMail = False
-
-delaiAvNotifRetardEnJours = 7 # Nombre de jours après l'apparition d'un retard auquel on prévient le superviseur en plus de l'interlocuteur habituel
-
-envoiSuperviseur = False # Variable indiquant s'il faut prévenir le superviseur
 
 typeMateriel = {KeyName_borneSimple:"borne simple", 
                 KeyName_borneDouble: "borne double",
@@ -51,9 +46,9 @@ class Urgence(Enum): # Noms des urgences selon leurs clés, organisés en enums
 
 def refRegion(pathDepartementRegions):
     """
-    Fonction qui charge le contenu d'un fichier json (supposé contenir un dictionnaire) dans une variable globale dictRegions
+    Fonction qui charge le contenu d'un fichier json (supposé contenir un dictionnaire) dans la variable globale dictRegions
     ENTREE: pathDepartementRegions (str) Path du fichier json contenant l'information
-    SORTIE: Aucune (mais créatin de la varaible globale dictRegions contenant l'info extraite du fichier lu)
+    SORTIE: Aucune (mais création de la variable globale dictRegions contenant l'info extraite du fichier lu)
     """
     global dictRegions
     with open(pathDepartementRegions, "r", encoding="utf8") as file:
@@ -98,7 +93,7 @@ def parseInputData(data):
     ENTREE: data (dict) Dictionnaire qui contient les données des parcs, 
             contenant au minimum {"dateDonnees":unString, 
                                   "parcs":[{"dateMiseEnService":"unString","periodiciteEnMois":"unInt", "nbVisitesOrganisees":"unInt"}]}
-    SORTIE: parcs (list) Liste de parcs, à laquelle on a ajouté les valeurs "urgence":"unStringSPECIFIQUE" et "dateEntretien":"unString" pour chaque parc
+    SORTIE: parcs (list) Liste de parcs, à laquelle on a ajouté les valeurs "urgence":"unStringSPECIFIQUE" et "dateEntretien":"unString" pour chaque parc;
             dateDonneesFormate (datetime) Date de l'envoi des données (extraite de data reçu en entrée)
     """
     dateDonnees = data[KeyName_DateDonnees]
@@ -120,9 +115,8 @@ def parseInputData(data):
         if(dateDonneesFormate+relativedelta(months=periodeEntretienEnMois)>=date_entretien_organise and date_entretien_organise>=dateDonneesFormate):#Si la date de l'entretien organisé est entre aujourd'hui et dans periodeEntretienEnMois mois
             parc["urgence"] = Urgence.organise.value # La visite dans les periodeEntretienEnMois mois est organisée, elle est donc pas du tout urgente à prévoir
             parc["dateEntretien"] = date_entretien_organise
-        else:# La visite dans les trois mois n'est pas organisée             
-            # La formule de la date du prochain l'entretien est : dateEntretien = dateMiseEnService + periodiciteEnMois* (nbVisitesOrganisees+1)
-            
+        else:# La visite dans les periodeEntretienEnMois mois n'est pas organisée             
+            # La formule de la date du prochain l'entretien est : dateEntretien = dateMiseEnService + periodiciteEnMois* (nbVisitesOrganisees+1)            
             date_entretien = strToDate(parc[KeyName_dateMiseEnService])+ relativedelta(months=parc[KeyName_periodiciteEnMois]*(1+parc[KeyName_nbVisitesOrganisees])) # On détermine la date de l'intervention à venir
             parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
@@ -152,7 +146,7 @@ def trierParcs(donneesParcs):
         if regionDuParc in dictParcs.keys():# Si la région est déjà présente dans le dictionnaire des parcs
             dictParcs.get(regionDuParc).append(parc) # On ajoute le parc à sa région dans le dictionnaire
         else: # La région n'est pas encore présente dans le dictionnaire des parcs
-            dictParcs[regionDuParc]=[parc] # On crée la région dans le doctionnaire et on y ajoute le parc
+            dictParcs[regionDuParc]=[parc] # On crée la région dans le dictionnaire, et on y ajoute le parc
     for parcs in dictParcs.values(): # Tri des parcs par date croissantes pour chaque région
         parcs.sort(key=lambda x: x["dateEntretien"]) # Trier les parcs selon la date de l'entretien
         for i, parc in enumerate(parcs[:]):
@@ -228,9 +222,9 @@ def create_html_content(jsonFileName,PeriodeEntretienenMois):
     """
     Fonction qui pour un nom de fichier JSON donné (qui doit être dans le même dossier que Editor.py) revoie l'HTML du mail correspondant
     ENTREE: jsonFileName (str) Le nom du fichier JSON contenant l'information (au format "nomDeFichier.json")
-    SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère
-            dateDonnees (datetime) La date des données (aka la date du jour lors de la création du Json)
-            envoyerMail (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard
+    SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère;
+            dateDonnees (datetime) La date des données (aka la date du jour lors de la création du Json);
+            envoyerMail (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard;
             envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
     """
     global envoyerMail, envoiSuperviseur, periodeEntretienEnMois
