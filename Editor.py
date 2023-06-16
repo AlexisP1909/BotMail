@@ -22,14 +22,18 @@ KeyName_armoire = "armoire"
 KeyName_nomEntreprise = "nomEntreprise"
 KeyName_adresse = "adresse"
 
+periodeEntretienEnMois = -1 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
-periodeEntretienEnMois = 3 # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
 
 delaiAvNotifRetardEnJours = 7 # Nombre de jours après l'apparition d'un retard auquel on prévient le superviseur en plus de l'interlocuteur habituel
 
 envoiSuperviseur = False # Variable indiquant s'il faut prévenir le superviseur
 
-entretienEnRetard = False
+envoyerMail = False
+
+delaiAvNotifRetardEnJours = 7 # Nombre de jours après l'apparition d'un retard auquel on prévient le superviseur en plus de l'interlocuteur habituel
+
+envoiSuperviseur = False # Variable indiquant s'il faut prévenir le superviseur
 
 typeMateriel = {KeyName_borneSimple:"borne simple", 
                 KeyName_borneDouble: "borne double",
@@ -123,8 +127,8 @@ def parseInputData(data):
             parc["dateEntretien"] = date_entretien
             if(dateDonneesFormate>=date_entretien):# Si la date des données est plus tardive que la date de l'entretien
                 parc["urgence"]=Urgence.dramatique.value #L'entretien est en retard
-                global envoiSuperviseur, entretienEnRetard
-                entretienEnRetard = True
+                global envoiSuperviseur, envoyerMail
+                envoyerMail = True
                 envoiSuperviseur =(dateDonneesFormate>=date_entretien+relativedelta(days=delaiAvNotifRetardEnJours)) # On prévient le superviseur si le délai d'attente de notification est passé depuis le retard
             elif(dateDonneesFormate+relativedelta(months=1)>=date_entretien): #Si la date de l'entretien est dans un mois (ou moins, mais pas en retard)
                 parc["urgence"]=Urgence.urgent.value # L'entretien est considéré comme urgent
@@ -220,22 +224,24 @@ def createHTML(dicoParcs, dateDonnees, pathHTMLBrut):
     if errorInInputData:html_final = html_final.replace("<!-- INSERER COMMENTAIRE -->", "Un problème a été rencontré dans la base de données: Verifiez la justesse des informations")
     return html_final
 
-def create_html_content(jsonFileName):
+def create_html_content(jsonFileName,PeriodeEntretienenMois):
     """
     Fonction qui pour un nom de fichier JSON donné (qui doit être dans le même dossier que Editor.py) revoie l'HTML du mail correspondant
     ENTREE: jsonFileName (str) Le nom du fichier JSON contenant l'information (au format "nomDeFichier.json")
     SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère
             dateDonnees (datetime) La date des données (aka la date du jour lors de la création du Json)
-            entretienEnRetard (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard
+            envoyerMail (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard
             envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
     """
-    global entretienEnRetard, envoiSuperviseur
+    global envoyerMail, envoiSuperviseur
+    global periodeEntretienEnMois
+    periodeEntretienEnMois = PeriodeEntretienenMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable
     donneesEntrees = readJSON(os.path.join(repertoire_actuel, jsonFileName))   # "Editor\\sample_ParserToEditor.json"
     listeParcs, dateDonnees = parseInputData(donneesEntrees)    
     dictParcsTrie = trierParcs(listeParcs)
     html_content = createHTML(dictParcsTrie, dateDonnees, os.path.join(repertoire_actuel, "html_template.html"))
     print(html_content)
-    return html_content, dateDonnees, entretienEnRetard, envoiSuperviseur
+    return html_content, dateDonnees, envoyerMail, envoiSuperviseur
 
 refRegion(os.path.join(repertoire_actuel, "departements.json")) # On charge le dictionnaire des départements/régions dans la variable globale "dictRegions"
 
