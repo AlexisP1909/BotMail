@@ -24,7 +24,7 @@ PeriodeEntretienenMois= 3
 VariablesEnvoiMail = {}
 VariablesEnvoiMail["smtp_server"] = 'smtp.office365.com'
 VariablesEnvoiMail["port"] = 587
-VariablesEnvoiMail["destinateur"] = 'maintenance@swishforgood.fr'
+VariablesEnvoiMail["destinateur"] = 'maintenance@swishforgood.com'
 VariablesEnvoiMail["password"] = 'Saz85887'
 # Modifier les adresses mail suivantes pour le destinataire (l'employé qui gère la planification d'entretiens) et son superviseur 
 VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
