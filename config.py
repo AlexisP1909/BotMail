@@ -22,10 +22,10 @@ VariablesExcelToPython["nom_fichierj"] = "data.json"
 PeriodeEntretienenMois= 3
 
 VariablesEnvoiMail = {}
-VariablesEnvoiMail["smtp_server"] = 'smtp.gmail.com'
-VariablesEnvoiMail["port"] = 465
-VariablesEnvoiMail["destinateur"] = 'alexis.pouillieute@gmail.com'
-VariablesEnvoiMail["password"] = 'eramkhznecqpnuob'
+VariablesEnvoiMail["smtp_server"] = 'smtp.office365.com'
+VariablesEnvoiMail["port"] = 587
+VariablesEnvoiMail["destinateur"] = 'maintenance@swishforgood.fr'
+VariablesEnvoiMail["password"] = 'Saz85887'
 # Modifier les adresses mail suivantes pour le destinataire (l'employé qui gère la planification d'entretiens) et son superviseur 
 VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
 mailDuSuperviseur = 'nicolas.gorgette@epfedu.fr'
