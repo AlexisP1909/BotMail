@@ -105,7 +105,7 @@ def ExcelToPython(Variables):
     EnvoiJSON["dateDonnees"] = date
     ListesParcs = []
     
-    for i in range(3,nb_lignes):
+    for i in range(NuméroLigneEnTetes +1,nb_lignes):
         #Initialisation des Variables de données
         NbVisitesOrganisees = 0
 
@@ -188,4 +188,5 @@ def ExcelToPython(Variables):
     chemin_fichier = os.path.join(repertoire_actuel, nom_fichierj)
     out_file = open(chemin_fichier, "w")
     json.dump(EnvoiJSON,out_file)#On enregistre le fichier Json
+    out_file.close()
     return None

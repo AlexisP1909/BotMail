@@ -247,7 +247,7 @@ def create_html_content(jsonFileName,PeriodeEntretienEnMois):
     SORTIE: html_content (str) L'html du contenu de mail sous forme de chaine de caractère;
             dateDonnees (datetime) La date des données (aka la date du jour lors de la création du Json);
             envoyerMail (boolean) Booléen qui signale si un (ou plusieurs) entretien(s) sont en retard;
-            envoiSuperieur (boolean) Booléen qui signale que l'averstissement doit être envoyé au superviseur en plus de l'employé
+            envoiSuperieur (boolean) Booléen qui signale que l'avertissement doit être envoyé au superviseur en plus de l'employé
     """
     global envoyerMail, envoiSuperviseur,periodeEntretienEnMois
     periodeEntretienEnMois = PeriodeEntretienEnMois # À partir du jour de réception des données (aka aujourd'hui) on regarde les entretiens à venir dans les x prochains mois, x étant cette variable    

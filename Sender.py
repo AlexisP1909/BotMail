@@ -1,4 +1,4 @@
-import smtplib, ssl           #le module smtplib définit un objet de session client SMTP
+import smtplib          #le module smtplib définit un objet de session client SMTP
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
@@ -29,7 +29,8 @@ def EnvoiMail(Variables):
 
     server = smtplib.SMTP_SSL(smtp_server, port) 
     server.ehlo()
-    server.login(destinateur, password)             #connexion au serveur Gmail
+    server.starttls()  # Utilisation du chiffrement STARTTLS
+    server.login(destinateur, password) 
     server.sendmail(destinateur, destinataire, message.as_string())    #envoie le mail
     print("ENVOYE")
     server.quit()
