@@ -27,5 +27,5 @@ VariablesEnvoiMail["port"] = 587
 VariablesEnvoiMail["destinateur"] = 'maintenance@swishforgood.fr'
 VariablesEnvoiMail["password"] = 'Saz85887'
 # Modifier les adresses mail suivantes pour le destinataire (l'employé qui gère la planification d'entretiens) et son superviseur 
-VariablesEnvoiMail["destinataire"] = ['alexis.pouillieute@epfedu.fr']
+VariablesEnvoiMail["destinataire"] = ['a.prendin@swishforgood.com']
 mailDuSuperviseur = 'nicolas.gorgette@epfedu.fr'
