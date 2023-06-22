@@ -27,9 +27,9 @@ def EnvoiMail(Variables):
     message['From'] = destinateur              #destinateur du mail
     message['To'] = ", ".join(destinataire)               #destinataire du mail
 
-    server = smtplib.SMTP(smtp_server, port) 
+    server = smtplib.SMTP_SSL(smtp_server, port) 
     server.ehlo()
-    server.starttls()  # Utilisation du chiffrement STARTTLS
+    #server.starttls()  # Utilisation du chiffrement STARTTLS
     server.login(destinateur, password) 
     server.sendmail(destinateur, destinataire, message.as_string())    #envoie le mail
     print("ENVOYE")
