@@ -30,18 +30,16 @@ def ExcelToPython(Variables):
     NomC_DateMiseEnService = Variables["NomC_DateMiseEnService"]
     NomC_Periodicite = Variables["NomC_Periodicite"]
     NomC_VisiteOrganisee = Variables["NomC_VisiteOrganisee"]
-    nom_fichier = Variables["nom_fichier"]
+    path_excel = Variables["path_excel"]
     nom_fichierj = Variables["nom_fichierj"]
 
     #
     Contact=[]
     # Obtenez le répertoire de travail actuel
     repertoire_actuel = os.path.dirname(os.path.abspath(__file__))
-    # Créez le chemin absolu en combinant le répertoire de travail et le nom du fichier
-    chemin_fichier = os.path.join(repertoire_actuel, nom_fichier)
 
     # Load the Excel workbook
-    wb = load_workbook(chemin_fichier)
+    wb = load_workbook(path_excel)
 
     # Select the worksheet
     feuille = wb[Nom_Feuille]
