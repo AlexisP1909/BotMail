@@ -15,7 +15,7 @@ VariablesExcelToPython["NomC_DateMiseEnService"] = "Date de mise en service"
 VariablesExcelToPython["NomC_Periodicite"] = "Periodicité en mois"
 VariablesExcelToPython["NomC_VisiteOrganisee"] = "Visite Organisée?"
 # Noms de fichiers Excel et JSON
-VariablesExcelToPython["nom_fichier"] = "Planning d'intervention Maintenance CENSURE POUR TESTS.xlsx"
+VariablesExcelToPython["path_fichier"] = "c:\\Users\\nicol\\OneDrive - Fondation EPF\\General - Projet Swish\\Planning d'intervention Maintenance DONNEES REELES.xlsx"
 VariablesExcelToPython["nom_fichierj"] = "data.json"
 
 # Changer la période sur laquelle porte les rappels
